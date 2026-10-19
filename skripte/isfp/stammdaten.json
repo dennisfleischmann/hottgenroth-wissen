@@ -1,0 +1,98 @@
+{
+  "_zweck": "Alles, was in JEDEM iSFP gleich ist. Bisher wurde es je Projekt neu getippt - mit dem Ergebnis, dass die Anschrift des Buros in vier Projekten in vier Schreibweisen steht ('Angelika-Machinek-Straße 14' / 'Angelika Machinek Straße 14' / 'Angelika-Machinek-Str. 14') und die BAFA-Nummer einmal mit und einmal ohne 'EB'. Hier steht sie einmal.",
+  "_pflege": "Andert sich etwas am Buro, wird es hier geandert - nicht im Skript und nicht im Projekt.",
+
+  "berater": {
+    "bafa_berater_nr":             "EB603279",
+    "energieberater/firma":        "Firma",
+    "energieberater/vorNachname":  "FS Energieberater GmbH",
+    "energieberater/StrasseHnr":   "Angelika-Machinek-Str. 14",
+    "energieberater/PLZ":          "60486",
+    "energieberater/ort":          "Frankfurt am Main",
+    "energieberater/telefon":      "0800 577 577 0",
+    "energieberater/email":        "auftrag@fs-energieberater.de",
+    "energieberater/web":          "https://www.fs-energieberater.de"
+  },
+
+  "_bilder": "Aus der fertigen Klenke-Datei herausgeloest. Format IF_JPG, weil die Datei durchgangig JPEG fuhrt.",
+  "bilder": {
+    "energieberater/logo":                         "stammdaten/logo.jpg",
+    "energieberater/ausgeschriebene_unterschrift": "stammdaten/unterschrift.jpg"
+  },
+
+  "_vorgaben": "Feste Vorbelegungen. Werden NUR gesetzt, wo das Feld leer ist - was der Berater geschrieben hat, bleibt.",
+  "vorgaben": {
+    "erlaeuterungen_hinweise_waermenetze":                         "Nicht relevant",
+    "energietraeger/energietraegerHeute/item/arbeitspreisErmittlung":  "EHK_NONE",
+    "energietraeger/energietraegerZukunft/item/arbeitspreisErmittlung": "EHK_NONE"
+  },
+
+  "_foerderung": "Satz und Deckel je Topf. 'name' und 'beschreibung' gehen wortlich in foerderProgramm. Die Zuordnung Paket -> Topf entscheidet 'regeln': die erste Regel, deren Muster auf eine NEUE Position des Pakets passt, gewinnt.",
+  "foerderung": {
+    "toepfe": {
+      "huelle": {
+        "name":         "BAFA BEG EM",
+        "beschreibung": "15% über 30.000 5% isfp Bonus",
+        "satz":         0.15,
+        "deckel":       30000,
+        "hinweis":      ""
+      },
+      "heizung": {
+        "name":         "KfW 458 Heizungsförderung",
+        "beschreibung": "30% Basisförderung 16% Bonus",
+        "satz":         0.46,
+        "deckel":       30000,
+        "hinweis":      "Betrag nachrechnen: Klimageschwindigkeits- und Einkommensbonus haengen am Fall, und nicht jede Position der Heizungszeile ist foerderfaehig. In Klenke standen 12.880 EUR, diese Rechnung kommt auf 14.628 EUR."
+      },
+      "ohne": {
+        "name":         "",
+        "beschreibung": "",
+        "satz":         0,
+        "deckel":       0,
+        "hinweis":      ""
+      }
+    },
+    "_regeln": "Hier steht NICHT, was foerderfaehig ist - hier steht, aus welchem Topf das Paket gefoerdert wird. Ein Paket aus PV plus Oberster Geschossdecke laeuft ueber die Huelle; dass die PV selbst leer ausgeht, regelt 'nicht_foerderfaehig'.",
+    "regeln": [
+      { "muster": "waermepumpe|wärmepumpe|pelletheizung|fernwaerme|fernwärme|heizung", "topf": "heizung" },
+      { "muster": ".*",                                                                "topf": "huelle"  }
+    ],
+    "_nicht_foerderfaehig": "Positionen, deren Name hierauf passt, gehen nicht in die Foerdersumme ein - auch dann nicht, wenn das Paket einen Topf hat.",
+    "nicht_foerderfaehig": "photovoltaik|pv[- ]anlage|stromspeicher"
+  },
+
+  "_rueckuebernahme": "Was aus einer fertigen .mSFPprojekt-Datei nach Hottgenroth zurueckgeholt wird (-Uebernehmen). Nur dorthin, wo Hottgenroth leer ist oder auf 'nan' steht.",
+  "rueckuebernahme": [
+    "fotos/freieErlaeuterung",
+    "bafa_vorgangs_nr",
+    "eigentuemer/briefanrede",
+    "techDoku",
+    "nutzereinfluss",
+    "massnahmenpakete/item/anlassFahrplan",
+    "massnahmenpakete/item/kennwerte_sfp/verbrauch",
+    "massnahmenpakete/item/wirtschaftlichkeit/energiekosten",
+    "wirtschaftlichkeit/energiekosten",
+    "erlaeuterungen_hinweise_waermenetze"
+  ],
+  "_nicht_zurueck": [
+    "fotos/* - die Bilder gehoeren NICHT in die iSFP2.xml. Sie liegen in PrMedia (MediaType 14/15) und werden erst beim Erzeugen der .mSFPprojekt eingesetzt. In allen 59 Projekten der Datenbank ist jeder Foto-Stream in der iSFP2.xml leer. Titel und Beschreibung pflegt man in Hottgenroth am Bild, nicht hier.",
+    "energieberater/logo und ausgeschriebene_unterschrift - kommen aus dem Ordner stammdaten/, nicht aus der Datei.",
+    "prinzipskizzen - die Druckanwendung rechnet jedes Bild auf ~300 px herunter (Fensterskizze 2024 -> 296 px); die Fassung in Hottgenroth ist die bessere.",
+    "bilanz/* und kennwerte_sfp/huelle/* - Rechenwerte, die die Datei nur gerundet zurueckgibt (114.921272277832 -> 114.9)."
+  ],
+
+  "_bildfunktionen": "PrMedia.XimMediaType ist die Funktion eines Bildes, PrMedia.Category die Reihenfolge darin. An Messinger und Bieche nachgewiesen: ShortDesc -> titel, InfoDesc -> beschreibung, MediaCopyright -> bildquelle.",
+  "bildfunktionen": {
+    "10": { "name": "Titelbild",          "ziel": "fotos/titel",            "anzahl": 1 },
+    "12": { "name": "Foto heute",         "ziel": "fotos/fotoHeute/item",   "anzahl": 4 },
+    "13": { "name": "Ansicht",            "ziel": "fotos/ansichten/item",   "anzahl": 0 },
+    "1":  { "name": "Unterlage (Plan)",   "ziel": "",                       "anzahl": 0 },
+    "0":  { "name": "ohne Funktion",      "ziel": "",                       "anzahl": 0 }
+  },
+
+  "_pruefung": "Schwellen der Schlusspruefung.",
+  "pruefung": {
+    "bildbeschreibung_min": 15,
+    "rundung_euro":         50
+  }
+}

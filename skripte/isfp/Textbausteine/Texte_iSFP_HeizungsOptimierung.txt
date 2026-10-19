@@ -1,0 +1,3 @@
+﻿Eigene Texte zum iSFP
+
+Ungedämmte Rohre nach einem Heizungsaustausch sind ein häufig unterschätztes Problem: Vor- und Rücklauf tauschen dann untereinander Wärme aus, und genau diese Energie fehlt am Ende bei den Heizkörpern. Deshalb gehört die einzelne Dämmung der Leitungen mit zum Austausch, ebenso wie speziell geformte Dämmschalen für Pumpen, Armaturen und Ventile. Ein zweiter Hebel ist der hydraulische Abgleich: Er verteilt die Wärme gleichmäßig auf alle Heizkörper im Haus, statt einige zu über- und andere zu unterversorgen. Kombiniert mit einer guten Einstellung von Heizung, Pumpen, Regelung und Thermostatventilen lassen sich so 10 bis 20% der Heizenergie einsparen.

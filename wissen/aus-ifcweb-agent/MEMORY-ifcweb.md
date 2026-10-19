@@ -1,0 +1,55 @@
+- [Aufbau des Sanierungsfahrplan-Agenten](sanierungsfahrplan-agent-aufbau.md) — vier Schichten, Skripte werden Werkzeuge; `erprobungsstand:` je Skill ist Pflichtfeld
+- [Hottgenroth-Bauteile per SQL](hottgenroth-bauteil-sql.md) — Bauteile per direktem INSERT in die LocalDB `(localdb)\HSETU`; Doku + Skripte im separaten `bauteile/`-Repo
+- [Agent-Auth: Keypair statt Shared-Token](hottgenroth-agent-auth-keypair.md) — geplante Umstellung auf Pro-Agent-Schlüsselpaar mit Admin-Freigabe/Revoke (später)
+- [Dekompilierter HSETU-Korpus](hsetu-dekompilierter-korpus.md) — kompletter Quelltext + Schnittstellenindex unter `C:\Projekte_Dev\hsetu-decompiled`, außerhalb des Repos
+- [API für den Bauteilkatalog](hsetu-bauteilkatalog-api.md) — `Hsetu.ConstructionCatalog.BL` kann Bauteile anlegen, kopieren, laden; beantwortet die offene Frage aus `bauteile-uebernehmen.md`
+- [Agent-Testaufbau auf FSLAPTOP1](hottgenroth-agent-testaufbau.md) — zwei Installationen (dist/ läuft gegen Produktion), Aufträge lokal per `HGA_*` + `--once` nachstellen
+- [DIN-18599-Anlagentechnik liegt im IBP-Blob](din18599-anlagentechnik-ibp-blob.md) — nicht in den `Pm*`-Tabellen; **Quelle ist `TableZusatz.Kernel18599V5` je Variante**, `PrMedia` nur die Kopie
+- [Sanierungsvarianten liegen in eberater.zip](energieberater-sanierungsvarianten.md) — eine Variante = je ein Satz in **sieben** Tabellen; Anlegen und Sanieren von außen sind **erprobt**, ohne SQL-Modellkopie
+- [Das .BDExit-Format ist entschlüsselt](bdexit-format.md) — Anwesenheitskarte je Satz, `Typ` ist immer eine Bytezahl; Leser/Schreiber in `werkzeuge/bdexit/`
+- [Verwaiste Energie.exe überschreibt still](energie-exe-verwaiste-instanz.md) — Fenster zu heißt nicht Prozess beendet; vor jedem Schreiben in `PrMedia` prüfen
+- [IBP-Modell hat Fabrikmethoden](din18599-modell-fabriken.md) — `NewGeneratorBoiler` & Co.; **`pID` nie leer lassen**, `b*_Standard`-Flags nie ausschalten
+- [IBP: Felder gelten je Bauart](ibp-bauart-felder.md) — Wärmepumpe rechnet mit `ftheta_si_out`, nicht `ftheta_VA`; Regelungs-Aufzählungen haben gleiche Zahlen mit anderer Bedeutung
+- [Funktionen wiederverwendbar bauen](funktionen-wiederverwendbar.md) — parametriert statt einkodiert, Objekte anlegen statt voraussetzen, **immer an einem zweiten Projekt prüfen**
+- [Lokale Testumgebung](lokale-testumgebung.md) — `php` nur unter `C:\Projekte_Dev\tools\php84`; ~47 Fehlschläge in der Suite sind Altlast, nicht die eigene Änderung
+- [fortrabbit verwirft chunked-Rümpfe](fortrabbit-chunked-rumpf.md) — HTTP 200 bei leerem Rumpf; Clients müssen `Content-Length` setzen, .NET schaltet ab ~8 KB auf chunked um
+- [Wirkungsprobe statt Selbstprüfung](wirkungsprobe-statt-selbstpruefung.md) — nach jeder Änderung die **Wirkung** messen (UA, Endenergie); Rückschreibbarkeit beweist nichts
+- [Bauart-Felder im IBP-Modell](ibp-bauart-felder.md) — nichts durch einen Vorgabewert ersetzen; Auslegungstemperatur hängt am **Heizkreis**, nicht am Erzeuger
+- [Vorlauftemperatur steht an zwei Stellen](vorlauftemperatur-zwei-stellen.md) — Heizkreis **und** Wärmepumpe; Standard 55/45 Heizkörper, hohe EH-Stufe **35/28 mit Flächenheizung**
+- [Pflichtbestandteile eines EH-Hauses](eh-haus-pflichtbestandteile.md) — **Lüftungsanlage ist immer dabei**, dazu hydraulischer Abgleich; Wärmepumpe allein reicht nicht
+- [Vorgabesatz Wärmepumpe](waermepumpe-vorgabesatz.md) — 55/45, Etagenring, Gruppe 1, **hydraulischer Abgleich immer**; WW ohne Zirkulation
+- [Kontaktrollen nach dem Import](hsetu-kontaktrollen-import.md) — leere Adressreiter: importierte Rollen hängen am Kontakt, die Oberfläche liest die Gruppenrollen; zwei Wege sind ausgeschlossen
+- [BmElement hält zwei Repositories](bmelement-zwei-repositories.md) — nur `RepositoryType` 1 (mtyModel) ist das gerechnete Gebäude; Repo 3 ist der Vorrat, **immer** ohne Angrenzung
+- [Flag für die thermische Hülle](bmelement-huellflaeche-flag.md) — `BmElementEnergyConsulting.CladdingSurface`, über dieselbe UUID am Element; **nicht** aus Typ/Angrenzung herleitbar
+- [Geometrie steht in BmElement.GeoDesc](hsetu-geometrie-in-geodesc.md) — die Geo*-Tabellen sind leer, das Modell liegt als XML in der Spalte; Satz `DIN18599_2011` trifft die Bruttoflaeche
+- [HottCAD hat einen eigenen IFC-Export](hottcad-eigener-ifc-export.md) — läuft ferngesteuert und ist im Agenten verdrahtet; rein lesend, anders als über die Oberfläche
+- [Projekt ohne Oberfläche laden](hsetu-projekt-headless-laden.md) — `TFWProjectEnvironment` begrenzt das Laden auf **ein** Projekt; ohne sie kommt die ganze Datenbank
+- [Offline nur 14 Tage](hsetu-offline-14-tage.md) — Vollversion holt die Lizenz online, Offline-Cache verfällt 14 Tage nach dem letzten Sync; Anmeldefenster nie wegklicken
+- [Neues Projekt: Zone + Räume](neues-projekt-zone-raeume.md) — Regelfall in einem Aufruf; **vier Angaben** brauche ich vorher; Zone wird von der Software umbenannt
+- [Wohngebäude als Einzonenmodell](wohngebaeude-einzonenmodell.md) — **fertiger Ablauf** `Setup-Wohngebaeude.ps1` (ein Aufruf, Vorbedingungen + 21 Invarianten); Räume muss der Nutzer zeichnen
+- [Räume, Zonen, Raumstempel](raum-zone-raumstempel.md) — handgeschriebene `BmZone` trägt (erprobt); `BmZone.InfoDesc` ist die Naht zum EE-Berater; Stempel = `BmRoom` **und** CAD-XML
+- [Messzyklus für Modelländerungen](messzyklus-snapshot-diff.md) — `Snapshot-Projekt.ps1` + `Diff-Snapshot.ps1` im `bauteile/`-Repo; XE-Session braucht `STARTUP_STATE = ON`
+- [HottCAD liest die Zeichnung zurück](hottcad-cadxmldata-fuehrend.md) — `CADXMLData` ist die Quelle, Abgeleitetes rechnet es selbst nach; Gehrungen repariert es **nicht**
+- [Dächer von außen anlegen](hottgenroth-daecher.md) — ein Dach trägt **zwei** Polygone; ohne den 3D-Umriss entsteht keine Fläche
+- [Ein Geschoss braucht vier Zeilen](hottgenroth-geschosse.md) — `BmFloor` allein genügt nicht, die Oberfläche liest die Geschossliste aus der Zeichnung
+- [Dachtypen: was geht, was noch nicht](hottgenroth-dachtypen-stand.md) — laufende Liste, beim Dazulernen fortschreiben
+- [Räume sind anlegbar](raeume-sind-anlegbar.md) — die alte Gegenbehauptung ist widerlegt; HottCAD ergänzt die Bauteilverweise selbst
+- [Projektname steht in LongDesc](prproject-name-steht-in-longdesc.md) — `ShortDesc` ist die Kunden-/Projektnummer, nie der Name; Schlüssel ist `UUID`, Fremdschlüssel `ProjectUUID`
+- [$PSScriptRoot nie in einer Parametervorgabe](snapshot-projekt-ordner-pflicht.md) — wirft **gerade** unter `powershell.exe -File` bei `[Parameter(...)]`; über `& ./skript.ps1` läuft es, daher bestand jeder Handtest (behoben 21.08.2026)
+- [Ein Walmdach ist EIN Element type="HippedRoof" mit 4 Kantenmittelpunkten, nicht vier Polygonal-Ebenen; BmElement.Slope traegt dabei den Sentinel](hottcad-walmdach-ist-ein-element.md) — Ein Walmdach ist EIN Element type="HippedRoof" mit 4 Kantenmittelpunkten, nicht vier Polygonal-Ebenen; BmElement.Slope traegt dabei den Sentinel
+- [Listen kommen als EIN String an](mcp-listenparameter-nicht-getrennt.md) — der `-File`-Binder trennt Arrays nicht; die Skripte trennen jetzt selbst (behoben 21.08.2026)
+- [Vor jedem Anlagentechnik-Auftrag zuerst prüfen, ob das Projekt überhaupt einen Kernel18599V5/eberater-Container führt](anlagentechnik-vorbedingung-blob-pruefen.md) — Vor jedem Anlagentechnik-Auftrag zuerst prüfen, ob das Projekt überhaupt einen Kernel18599V5/eberater-Container führt — eine Abfrage, spart einen ganzen Fehllauf
+- [Fehlende Pflichtangabe hängt, statt zu scheitern](pflichtparameter-haengt-an-eingabeabfrage.md) — weicht `pflicht` im Katalog vom `[Parameter(Mandatory)]` des Skripts ab, wartet PowerShell stumm an der Eingabeabfrage (behoben 21.08.2026)
+- [geschoss_anlegen verschiebt darueberliegende Geschosse NICHT](geschoss-einfuegen-kollidiert-mit-darueberliegendem.md) — geschoss_anlegen verschiebt darueberliegende Geschosse NICHT — ein eingeschobenes Geschoss landet still auf derselben Hoehenlage; erst geschoss_aendern raeumt Platz
+- [Die Zuweisung Bauteilaufbau -> verbaute Wand laeuft ueber BmElement.CatalogBasisUUID -> TcBasis.UId; daneben gibt es Elemente ganz ohne Katalogbezug](bmelement-katalogzuweisung-catalogbasisuuid.md) — Die Zuweisung Bauteilaufbau -> verbaute Wand laeuft ueber BmElement.CatalogBasisUUID -> TcBasis.UId; daneben gibt es Elemente ganz ohne Katalogbezug
+- [Das iSFP-Dokument liegt als PrMedia.Media (varbinary) mit MediaName='iSFP2.xml'; Vorbedingungsabfrage vor jedem iSFP-Auftrag, genau wie bei der Anlagentechnik](isfp-xml-liegt-als-prmedia-isfp2xml.md) — Das iSFP-Dokument liegt als PrMedia.Media (varbinary) mit MediaName='iSFP2.xml'; Vorbedingungsabfrage vor jedem iSFP-Auftrag, genau wie bei der Anlagentechnik
+- [PrProject.VariantType ist bei allen 102 Projekten konstant 2 und sagt nichts über Sanierungsvarianten; Schlüsselspalte heißt dort UUID, nicht ProjectUUID](prproject-varianttype-ist-keine-variantenliste.md) — PrProject.VariantType ist bei allen 102 Projekten konstant 2 und sagt nichts über Sanierungsvarianten; Schlüsselspalte heißt dort UUID, nicht ProjectUUID
+- [Umriss ändern heißt Ecken verschieben](umriss-aendern-statt-ersetzen.md) — nicht löschen und neu bauen; die Wand behält U-Wert, Katalogverweis und Hüllflächen-Flag, zu rechnen bleibt allein die Gehrung
+
+- [BmElement hat keine FloorUUID; die Geschosszuordnung eines Bauteils steht NUR im CAD-XML-Attribut floor=](bmelement-hat-keinen-geschoss-fremdschluessel.md) — StartingStoreyUUID ist projektweit Sentinel oder NULL
+
+- [Von außen gebaute Projekte haben leeres GeoDesc und keine Repo-1-Elemente](geodesc-leer-nach-aussenbau.md) — alle Export- und Ansichtswerkzeuge liefern 0 Bauteile, bis HottCAD das Projekt einmal geöffnet und gespeichert hat
+
+- [New-Geschoss.ps1 kopiert ClearHeight und BmData.InfoDesc aus dem Vorlagengeschoss und zieht sie nie nach; Set-Geschoss.ps1 setzt ClearHeight ebenfalls nicht](geschoss-anlegen-erbt-clearheight-und-infodesc.md) — ein per Werkzeug angelegtes Geschoss traegt danach die lichte Hoehe und den Geschossnamen der Vorlage
+
+- [Keller unter das unterste Geschoss haengen: geschoss_anlegen setzt die Hoehenlage auf Bezug minus dessen Geschosshoehe (nicht der neuen), danach geschoss_aendern IMMER mit expliziter Hoehenlage](geschoss-nach-unten-anbauen-ohne-die-oberen-zu-verschieben.md) — sonst rutschen alle Geschosse darueber samt Waenden

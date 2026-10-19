@@ -1,0 +1,14 @@
+﻿Eigene Texte zum iSFP
+
+Heizwert Erdgasheizung
+Brennwert Erdgasheizung
+Nachtspeicheröfen
+Ölheizung
+Wärmepumpe
+Heizwert Kohleheizung
+Elektrodirektheizung
+Fernwärme
+Gas-Spezialheizung
+Heizöfen
+Pelletheizung
+Festbrennstoffkessel

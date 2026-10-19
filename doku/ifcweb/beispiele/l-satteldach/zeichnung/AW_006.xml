@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<geometry>
+  <Wall count="1">
+    <wall name="AW 006" GUID="0c25ed1e-6ab0-451b-a4a4-f48a2d4345f1" floor="67710ebf-3db1-4f16-9a30-338e62b3db5c" u_value="0.9" u_valueDimGuid="ea642129-8191-4688-b6ee-fb785f5d30be" u_valueDimName="Massive Konstruktion - Zweischalige Wandaufbauten mit Dämmschicht" u_value_marker="AW_36_5" u_value_default_typo="True" height="2.6" wall_type="OuterContour" outer_wall="True" fireProtectionWall_type="Standard" direction="3.14159265358979" prev="6e25e428-9f15-48af-879b-d0bf6addb1f6" next="bc9e8b52-23e3-4928-8b3d-1b9a63d84cf0">
+      <points count="4">
+        <p>3.36089703344533;16.0919464209772;0.2</p>
+        <p>3.36089703344533;6.09194642097719;0.2</p>
+        <p>3.72589703344533;6.45694642097719;0.2</p>
+        <p>3.72589703344533;15.7269464209772;0.2</p>
+      </points>
+      <repositories count="1">
+        <val>69ff38fe-5c13-4454-908f-e36815d038bd</val>
+      </repositories>
+      <bottom_planes count="1">
+        <it ref="603e8e25-f251-4951-9593-ec805269cfd9" thickness="0.2">
+          <points count="6">
+            <p>11.3608970334453;12.0919464209772;0.2</p>
+            <p>11.3608970334453;16.0919464209772;0.2</p>
+            <p>3.36089703344533;16.0919464209772;0.2</p>
+            <p>3.36089703344533;6.09194642097719;0.2</p>
+            <p>17.3608970334453;6.09194642097719;0.2</p>
+            <p>17.3608970334453;12.0919464209772;0.2</p>
+          </points>
+        </it>
+      </bottom_planes>
+      <soil_guids count="2">
+        <val>d5897874-1d61-43b6-a2e0-5d6fa92d82ac</val>
+        <val>ed68f1cb-46b6-465b-a9f2-ec9257aa93bb</val>
+      </soil_guids>
+      <WallDrawInfo drawSideP1P4="True" drawSideP2P3="True" connectedSideP1P4="True" connectedSideP2P3="True" wallIntersectionTypeP1P4="Miter" wallIntersectionTypeP2P3="Miter" intersectionUserDefinedP1P4="False" intersectionUserDefinedP2P3="False" />
+    </wall>
+  </Wall>
+</geometry>

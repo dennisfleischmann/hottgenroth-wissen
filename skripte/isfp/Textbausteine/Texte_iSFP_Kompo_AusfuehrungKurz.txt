@@ -1,0 +1,101 @@
+﻿Eigene Texte zum iSFP
+
+DACH / DECKE
+Dämmung und Neueindeckung des Daches
+XX cm Auf- und Zwischensparrendämmung, WLS 035
+U-Wert neu: 0,14 W/(m²K)
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+XX cm Unter- und Zwischensparrendämmung, WLS 035
+U-Wert neu: 0,14 W/(m²K)
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+XX cm Dämmung der obersten Geschossdecke, WLS 035
+U-Wert neu: 0,14 W/(m²K)
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Decke gegen Außenluft
+XX cm Dämmplatten unterseitig an Außendecke, WLS 035
+U-Wert neu = 0,20 W/m²K
+
+AUßENWAND
+XX cm Wärmeverbundsystem (WDVS)
+Mineralwolle oder Hartschaum Dämmplatten, WLS 035
+Diffusionsoffene Fassadendämmung aus Holzfaser, WLS 037
+U-Wert neu = 0,20 W/m²K
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Kerndämmung Hohlraum des zweischaligen Mauerwerks
+XX cm Granulat/Zellulose, WLS 035
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Innendämmung an der Wandinnenseite anbringen
+XX cm diffusionsoffene Dämmplatten, WLS 035
+
+FENSTER
+3-Scheiben-Wärmeschutzfenster
+Fenster U-Wert neu Uw = 0,95 W/(m²K)
+Dachfenster U-Wert neu Uw = 1,0 W/(m²K)
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Kastenfenster ertüchtigen und neu verglasen
+Nachträgliche Abdichtung
+U-Wert neu Uw = 1,30 W/(m²K)
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+HAUSTÜR
+Hauseingangstür, U-Wert neu Ud = 1,3 W/(m²K)
+Einbruchschutz mind. RC2
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+KELLERDECKE / BODENPLATTE
+XX cm Dämmplatten unterseitig an Kellerdecke WLS 035
+U-Wert neu = 0,25 W/m²K
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Einblasdämmung in Hohlraum der Deckenkonstruktion
+XX cm Granulat/Zellulose WLG 035
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Einblasdämmung in Hohlraum der Bodenkonstruktion
+XX cm Granulat/Zellulose WLG 035
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Dämmung auf Bodenplatte verlegen
+XX Hartschaum-Trittschalldämmung WLS 035
+U-Wert neu = 0,25 W/m²K
+
+KELLERWÄNDE
+Perimeterdämmung von außen an Kellerwand anbringen und abdichten
+XX cm  PS/PUR-Hartschaum WLS 035
+U-Wert neu = 0,25 W/m²K
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Innendämmung an der Wandinnenseite anbringen
+XX cm  PS/PUR-Hartschaum WLS 035
+U-Wert neu = 0,25 W/m²K
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+Innenwände zum unbeh. Keller dämmen
+U-Wert neu = 0,25 W/m²K
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+KELLER (teilbeheizt)
+Innenwände zum unbeh. Keller, U-Wert neu = 0,25 W/m²K
+Kellertür zum unbeh. Keller, U-Wert neu = 1,3 W/(m²K)
+Kellerwand Innendämmung, U-Wert neu = 0,25 W/m²K
+
+HEIZUNG
+Zentralheizung mit Luft-Wasser-Wärmepumpe
+Zentralheizung mit Sole-Wasser-Wärmepumpe
+Anschluss an Fernwärme
+Heizstabunterstützung bei Spitzlast
+PV Anlage zur Unterstützung der Wärmepumpe
+Heizungsoptimierung
+Heizungsoptimierung und Heizkörper austauschen
+Installation von Fußbodenheizung
+
+WARMWASSER
+Zentrale Warmwasserbereitung über Heizanlage
+Zentrale Warmwasserbereitung über Solarthermie
+Deckung des Wärmebedarfs > 50%
+Heizungsunterstützung bei Spitzlast
+
+SONNENSCHUTZ
+Außenliegender Sonnenschutz
+Parallel zu Fensterfläche verlaufend
+
+LÜFTUNG
+Dezentrale Lüftungsanlagen mit Wärmerückgewinnung
+Einbau in der Außenwand zu Aufenthaltsräumen
+
+Photovoltaikanlage
+Installation von Modulen und Wechselrichter
+Installation eines Stromspeichers

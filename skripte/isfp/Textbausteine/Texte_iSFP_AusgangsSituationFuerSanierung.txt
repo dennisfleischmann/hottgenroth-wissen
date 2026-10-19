@@ -1,0 +1,4 @@
+﻿Text:
+-
+
+Im Zuge der Bestandsaufnahme wurden für Ihr Gebäude mehrere Ansatzpunkte zur Energieeinsparung herausgearbeitet, die sich in zwei Bereiche gliedern lassen:¶¶Bauliche Hülle:¶- Bodenplatte – nachträgliche Dämmung¶- Oberste Geschossdecke – nachträgliche Dämmung¶- Dach – nachträgliche Dämmung¶- Außenwände – nachträgliche Dämmung¶- Fenster – Austausch gegen förderfähige, wärmeschutzverglaste Modelle¶- Dachfenster – Austausch gegen förderfähige, wärmeschutzverglaste Modelle¶¶Technische Gebäudeausrüstung (TGA):¶- Wärmeabgabe – hydraulischer Abgleich der Heizungsanlage nach DIN 18380¶- Wärmeerzeuger – Modernisierung durch ein zeitgemäßes Anlagenkonzept¶- Lüftung – Kontrolle beziehungsweise Herstellung der Luftdichtheit¶- Lüftung – Nachrüstung einer Lüftungsanlage mit Wärmerückgewinnung

@@ -1,0 +1,21 @@
+# Kundendaten bleiben lokal
+skripte/bauteile/snapshots/
+vorlagen/Vorlage-Partnermodell.sqproj
+**/klenke/
+**/laeufe/
+*.mSFPprojekt
+
+# Zugangsdaten
+.env
+appsettings.local.json
+
+# Dekompilierter HSETU-Quelltext gehört nicht hierher
+hsetu-decompiled/
+isfp2-decompiled/
+
+# Arbeitsreste
+*.vor-*
+__pycache__/
+node_modules/
+bin/
+obj/

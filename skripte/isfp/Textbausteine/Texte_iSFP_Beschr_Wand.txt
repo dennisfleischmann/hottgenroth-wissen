@@ -1,0 +1,15 @@
+﻿Eigene Texte zum iSFP
+
+Massiv gemauert, ungedämmt
+Massiv gemauert, Außendämmung
+Massiv gemauert, Innendämmung
+Zweischalig gemauert, ungedämmt
+Zweischalig gemauert, Außendämmung
+Zweischalig gemauert, Kerndämmung
+Zweischalig gemauert, Innendämmung
+Holzbauweise, ungedämmt
+Holzbauweise, Kerndämmung
+Holzbauweise, Innendämmung
+Holzbauweise, Außendämmung
+Fertigbauweise, gedämmt
+Fachwerkbauweise, ungedämmt

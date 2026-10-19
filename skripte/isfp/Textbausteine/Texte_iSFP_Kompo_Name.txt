@@ -1,0 +1,45 @@
+﻿Eigene Texte zum iSFP
+
+Außenwände dämmen
+Außenwände dämmen mit WDVS
+Außenwände dämmen mit Einblasdämmung
+Außenwände dämmen mit Innendämmung
+
+Dach dämmen
+Dach dämmen und neu eindecken
+Oberste Geschossdecke dämmen
+Dach und oberste Geschossdecke dämmen
+
+Fenster austauschen
+Dachfenster austauschen
+Außentüren austauschen
+Außenliegender Sonnenschutz
+Kastenfenster ertüchtigen
+
+Kellerdecke dämmen
+Kellerboden dämmen
+Kellerwände dämmen
+Kellerfenster austauschen
+Bodenplatte dämmen
+
+Heizung austauschen: LW-Wärmepumpe
+Heizung austauschen: SW-Wärmepumpe
+Heizung austauschen: WW-Wärmepumpe
+Heizung austauschen: LL-Wärmepumpe
+Heizung austauschen: Pelletheizung
+Heizung austauschen: Fernwärme
+Heizung einbauen: LW-Wärmepumpe
+Heizung einbauen: SW-Wärmepumpe
+Heizung einbauen: WW-Wärmepumpe
+Heizung einbauen: LL-Wärmepumpe
+Heizung einbauen: Pelletheizung
+
+Heizungsoptimierung
+Fußbodenheizung installieren
+Warmwasser über Wärmepumpe
+Warmwasser über Solarthermie
+Warmwasser dezentral
+Lüftungsanlage dezentral
+Lüftungsanlage zentral
+
+Photovoltaikanlage

@@ -1,0 +1,16 @@
+﻿Eigene Texte zum iSFP
+
+Satteldach; ungedämmt
+Satteldach; gedämmt
+
+Walmdach; ungedämmt
+Walmdach; gedämmt
+
+Flachdach; ungedämmt
+Flachdach; gedämmt
+
+Pultdach; ungedämmt
+Pultdach; gedämmt
+
+Oberste Geschossdecke gedämmt
+Oberste Geschossdecke ungedämmt

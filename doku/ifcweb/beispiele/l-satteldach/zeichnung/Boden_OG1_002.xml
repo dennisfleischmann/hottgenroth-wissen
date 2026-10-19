@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<geometry>
+  <Platform count="1">
+    <platform name="Boden OG1 002" GUID="d5b0a825-4d27-4010-93dd-a3619c6ff932" floor="67710ebf-3db1-4f16-9a30-338e62b3db5c" u_value="1" u_valueDimGuid="dff64374-7940-4e70-9b5a-4565f338e708" u_valueDimName="Kellerdecke Stahlbeton massiv" u_value_default_typo="True" thickness="0.2" offset_bottom="False" against_soil="False" against_air="False" against_unheated="False" building_hull_added="False" is_hole="False" is_platform="False" is_auto_generated="True" border="OuterWall">
+      <points count="6">
+        <p>11.3608970334453;16.0919464209772;2.8</p>
+        <p>11.3608970334453;12.0919464209772;2.8</p>
+        <p>17.3608970334453;12.0919464209772;2.8</p>
+        <p>17.3608970334453;6.09194642097719;2.8</p>
+        <p>3.36089703344533;6.09194642097719;2.8</p>
+        <p>3.36089703344533;16.0919464209772;2.8</p>
+      </points>
+      <repositories count="1">
+        <val>1590184e-5902-40e4-b6eb-19ec6037af30</val>
+      </repositories>
+    </platform>
+  </Platform>
+</geometry>

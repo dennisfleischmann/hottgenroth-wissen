@@ -1,0 +1,7 @@
+﻿Eigene Texte zum iSFP
+
+Keller unbeheizt und ungedämmt
+Keller unbeheizt und teilweise gedämmt
+Keller beheizt und ungedämmt
+Keller beheizt und gedämmt
+Nicht unterkellert

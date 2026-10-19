@@ -1,0 +1,25 @@
+﻿Eigene Texte zum iSFP
+
+3-Scheiben-Wärmeschutzfenster, Uw = 0,9 W/(m²/K)
+Hauseingangstür, max. U-Wert 1,3 W/(m²/K), mind. RC2
+3-Scheiben Dachfenster, Uw = 1,0 W/(m²/K)
+Öl-Kessel wird gegen Holzpellet-Heizkessel ausgetauscht
+Gesamtdurchlassgrad g- 0,50
+dezentrale Lüftungsanlage mit Wärmerückgewinnung
+HK-Nischen ausdämmen
+Heizkörper erneuern
+Heizungsoptimierung
+Zentralheizung mit Luft-Wasser-Wärmepumpe
+Photovoltaik zur Unterstützung der Wärmepumpe
+Zentrale Warmwasserbereitung Wärmepumpe
+Zusatzkomponente Solarthermie
+Dach: 24 cm Zwischen- & Untersparrendämmung WLG 035
+OGD: 24 cm Mineralwolldämmung WLG 035
+Zentralheizung: Luft-Wasser-Wärmepumpe
+Pufferspeicher auf Bedarf auslegen
+Hybrides System mit bestehender Gas-Brennwerttherme
+Installation von Fußbodenheizung
+U-Wert neu: 0,13 W/(m²/K)
+U-Wert neu: 0,24 W/(m²/K)
+U-Wert neu: 0,20 W/(m²/K)
+10 cm PUR/PIR Hartschaumplatten WLG 035

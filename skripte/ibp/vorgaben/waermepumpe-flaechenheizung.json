@@ -1,0 +1,47 @@
+{
+  "_": "Vorgabesatz Waermepumpe mit FLAECHENHEIZUNG - fuer hohe Effizienzhaus-",
+  "__": "Stufen. Unterschied zu waermepumpe-sanierung.json: Auslegung 35/28 statt",
+  "___": "55/45 und Flaechenheizung statt Heizkoerper. Beides gehoert zusammen -",
+  "____": "35/28 an Heizkoerpern deckt die Heizlast nicht.",
+  "_____": "Die Auslegung steht an ZWEI Stellen: am Heizkreis (Verteilsystem) UND",
+  "______": "an der Erzeugerkomponente (Waermepumpe selbst). Beide muessen 35/28",
+  "_______": "tragen; nur eine zu setzen laesst die Arbeitszahl auf dem alten Wert.",
+  "________": "Belegt an 15 Waermepumpenprojekten der LocalDB: Kreis 35/28,",
+  "_________": "Erzeuger 35/28, WaterPanel, Regelung 7, Senke unberuehrt bei 60/50.",
+
+  "heizung": {
+    "auslegung": { "vorlauf": 35, "ruecklauf": 28 },
+
+    "erzeuger": [ { "bauart": "HeatPump", "wp_typ": 0, "baujahr": 2026,
+                    "brennstoff": "Brennstoff_StromMix",
+                    "vorlauf": 35, "ruecklauf": 28 } ],
+
+    "speicher": [ { "baujahr": 2026, "zirkulation": false, "gleicher_raum": true } ],
+
+    "uebergabe": [ { "bauart": "WaterPanel", "regelung": 7,
+                     "raumhoehe": 3, "anteil": 1 } ],
+
+    "verteilung": {
+      "netz": 1,
+      "netz_heizung": 0,
+      "gruppe": 0,
+      "gamma": 0.35,
+      "heizkoerper": 1,
+      "abgleich": 2,
+      "abgleich_pumpe": true,
+      "pumpen": 1,
+      "pumpe_regelung": 2,
+      "pumpe_auslegung": 1,
+      "leitungen": [ { "art": 2, "lage": 1, "daemmung": 7 },
+                     { "art": 1, "lage": 1, "daemmung": 7 },
+                     { "art": 0, "lage": 1, "daemmung": 7 } ]
+    }
+  },
+
+  "warmwasser": {
+    "erzeuger": [ { "bauart": "HeatPump", "wp_typ": 0, "baujahr": 2026,
+                    "brennstoff": "Brennstoff_StromMix" } ],
+    "speicher": [ { "baujahr": 2026, "zirkulation": false } ],
+    "verteilung": { "netz": 0, "zirkulation": 1, "gruppe": 0, "zentral": 0 }
+  }
+}

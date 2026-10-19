@@ -1,0 +1,30 @@
+{
+  "skill_name": "hottcad-modell",
+  "hinweis": "Alle Evals sind Trockenlaeufe bis Haltepunkt 1 (Gebaeude-Datenblatt). Echtlaeufe schreiben in die reale Arbeitsplatz-Datenbank und gehoeren nicht in automatisierte Tests - die Etappen B-D werden am naechsten echten Kundenfall erprobt.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "krause-regression-datenblatt",
+      "prompt": "https://drive.google.com/drive/folders/1mKeUQns4_Iscb903VkzyGS6cBOk5gVbQ\n\nErstelle mir daraus das Hottgenroth-Modell. Projekt heisst 3QHTK_Lennart Krause. WICHTIG: Nur bis zum ersten Haltepunkt arbeiten (Gebaeude-Datenblatt vorlegen), nichts in die Datenbank schreiben.",
+      "expected_output": "Datenblatt mit: Kontur 7,27 x 11,215, Geschosse EG/OG/DG (+2,79 je Ebene), Satteldach 25 Grad (First +8,88, Traufe +6,26), Trennwand West (fehlende Ansicht erkannt, Nachbar Am Raut 5), 15 Fenster + Haustuer 1,15x2,20 mit Herkunft je Mass, Aufbauten aus der Neuner-Leistungsbeschreibung (CLT 10 + HWF 20, Dach 30 HWF, Boden 20 Daemmung, Fenster Ug 0,5). Haelt an und fragt nach Freigabe statt zu schreiben.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "name": "simic-generalisierung-bestand",
+      "prompt": "Kunde Simic, Unterlagen liegen im Drive-Ordner 1DbwRnCnretl9p_ER4FMAI1m2fI4yv8nr. Setz mir das Gebaeude in Hottgenroth um (Projekt Simic existiert schon). Nur bis zum ersten Haltepunkt - Datenblatt zeigen, nichts schreiben.",
+      "expected_output": "Datenblatt fuer das Bestands-EFH (Baujahr 1937, 4 Ebenen inkl. Keller, Satteldach 45 Grad), benennt die Luecken der Quellenlage ehrlich (EG-Grundriss fehlt/Duplikat, keine Fensterliste -> Hoehen angenommen) und haelt an. Darf NICHT so tun, als waeren alle Masse belegt.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "name": "fehlende-unterlagen-anhalten",
+      "prompt": "Hier ist der Ordner vom Neubau Meier: es liegt nur das Bautraeger-Angebot drin, keine Plaene. Bau mir das Modell in Hottgenroth, Projekt NEUB1_Meier.",
+      "expected_output": "Erkennt, dass ohne Eingabeplan/Grundrisse keine Geometrie belegbar ist; fordert die fehlenden Unterlagen konkret an (Eingabeplan, Flaechenberechnung, Fensterliste) und haelt an, statt Standardmasse zu erfinden oder loszubauen.",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}

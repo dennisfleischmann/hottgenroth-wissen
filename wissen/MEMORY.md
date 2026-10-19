@@ -1,0 +1,116 @@
+﻿# Index des Hottgenroth-Wissens
+
+Eine Zeile je Eintrag, Details stehen nur in der verlinkten Datei. Neue Einträge: Datei anlegen, Zeile hier ergänzen.
+
+- [Hottgenroth-Client: Login-Anforderungen](hottgenroth-client-login-anforderungen.md) — sub muss GUID sein, tenants ein Array; U-Therm=4c5aed38, Hott-Therm=1c0e1843; LICC-Log verrät gesuchte Lizenz-GUID
+- [Aufbau des Sanierungsfahrplan-Agenten](sanierungsfahrplan-agent-aufbau.md) — vier Schichten, Skripte werden Werkzeuge; `erprobungsstand:` je Skill ist Pflichtfeld
+- [Hottgenroth-Bauteile per SQL](hottgenroth-bauteil-sql.md) — Bauteile per direktem INSERT in die LocalDB `(localdb)\HSETU`; Doku + Skripte im `bauteile/`-Repo
+- [Agent-Auth: Keypair statt Shared-Token](hottgenroth-agent-auth-keypair.md) — geplante Umstellung auf Pro-Agent-Schlüsselpaar mit Admin-Freigabe/Revoke (später)
+- [Dekompilierter HSETU-Korpus](hsetu-dekompilierter-korpus.md) — kompletter Quelltext + Schnittstellenindex unter `C:\Projekte_Dev\hsetu-decompiled`
+- [API für den Bauteilkatalog](hsetu-bauteilkatalog-api.md) — `Hsetu.ConstructionCatalog.BL` kann Bauteile anlegen, kopieren, laden
+- [Agent-Testaufbau auf FSLAPTOP1](hottgenroth-agent-testaufbau.md) — zwei Installationen; Aufträge lokal per `HGA_*` + `--once` nachstellen
+- [DIN-18599-Anlagentechnik liegt im IBP-Blob](din18599-anlagentechnik-ibp-blob.md) — Quelle ist `TableZusatz.Kernel18599V5` je Variante; `PrMedia` nur die Kopie
+- [Sanierungsvarianten liegen in eberater.zip](energieberater-sanierungsvarianten.md) — eine Variante = sieben Tabellen; Anlegen und Sanieren von außen sind erprobt
+- [Das .BDExit-Format ist entschlüsselt](bdexit-format.md) — Anwesenheitskarte je Satz, `Typ` ist Bytezahl; Leser/Schreiber in `werkzeuge/bdexit/`
+- [Verwaiste Energie.exe überschreibt still](energie-exe-verwaiste-instanz.md) — Fenster zu ≠ Prozess beendet; vor Schreiben in `PrMedia` prüfen
+- [IBP-Modell hat Fabrikmethoden](din18599-modell-fabriken.md) — `NewGeneratorBoiler` & Co.; `pID` nie leer lassen, `b*_Standard`-Flags nie ausschalten
+- [IBP: Felder gelten je Bauart](ibp-bauart-felder.md) — Wärmepumpe rechnet mit `ftheta_si_out`; Regelungs-Aufzählungen: gleiche Zahlen, andere Bedeutung
+- [Funktionen wiederverwendbar bauen](funktionen-wiederverwendbar.md) — parametriert statt einkodiert; immer an einem zweiten Projekt prüfen
+- [Wirkungsprobe statt Selbstprüfung](wirkungsprobe-statt-selbstpruefung.md) — nach jeder Änderung die Wirkung messen (UA, Endenergie); Rückschreibbarkeit beweist nichts
+- [Vorlauftemperatur steht an zwei Stellen](vorlauftemperatur-zwei-stellen.md) — Heizkreis und Wärmepumpe; Standard 55/45 Heizkörper, EH 35/28 Flächenheizung
+- [Pflichtbestandteile eines EH-Hauses](eh-haus-pflichtbestandteile.md) — Lüftungsanlage immer dabei + hydraulischer Abgleich; Wärmepumpe allein reicht nicht
+- [Vorgabesatz Wärmepumpe](waermepumpe-vorgabesatz.md) — 55/45, Etagenring, Gruppe 1, hydraulischer Abgleich immer; WW ohne Zirkulation
+- [Kontaktrollen nach dem Import](hsetu-kontaktrollen-import.md) — leere Adressreiter: Rollen hängen am Kontakt, Oberfläche liest Gruppenrollen
+- [BmElement hält zwei Repositories](bmelement-zwei-repositories.md) — nur `RepositoryType` 1 (mtyModel) ist das gerechnete Gebäude; Repo 3 immer ohne Angrenzung
+- [Flag für die thermische Hülle](bmelement-huellflaeche-flag.md) — `BmElementEnergyConsulting.CladdingSurface`; nicht aus Typ/Angrenzung herleitbar
+- [Geometrie steht in BmElement.GeoDesc](hsetu-geometrie-in-geodesc.md) — Geo*-Tabellen leer; Modell als XML in der Spalte; Satz `DIN18599_2011` trifft Bruttofläche
+- [HottCAD hat einen eigenen IFC-Export](hottcad-eigener-ifc-export.md) — läuft ferngesteuert und ist im Agenten verdrahtet; rein lesend
+- [Projekt ohne Oberfläche laden](hsetu-projekt-headless-laden.md) — `TFWProjectEnvironment` begrenzt auf ein Projekt; ohne sie kommt die ganze Datenbank
+- [Offline nur 14 Tage](hsetu-offline-14-tage.md) — Offline-Cache verfällt 14 Tage nach letztem Sync; Anmeldefenster nie wegklicken
+- [Neues Projekt: Zone + Räume](neues-projekt-zone-raeume.md) — Regelfall in einem Aufruf; vier Angaben vorher; Zone wird von der Software umbenannt
+- [Wohngebäude als Einzonenmodell](wohngebaeude-einzonenmodell.md) — fertiger Ablauf `Setup-Wohngebaeude.ps1`; Räume muss der Nutzer zeichnen
+- [Räume, Zonen, Raumstempel](raum-zone-raumstempel.md) — handgeschriebene `BmZone` trägt; `BmZone.InfoDesc` ist Naht zum EE-Berater; Stempel = `BmRoom` + CAD-XML
+- [Messzyklus für Modelländerungen](messzyklus-snapshot-diff.md) — `Snapshot-Projekt.ps1` + `Diff-Snapshot.ps1`; XE-Session braucht `STARTUP_STATE = ON`
+- [HottCAD liest die Zeichnung zurück](hottcad-cadxmldata-fuehrend.md) — `CADXMLData` ist die Quelle; Gehrungen repariert es nicht
+- [Dächer von außen anlegen](hottgenroth-daecher.md) — ein Dach trägt zwei Polygone; ohne 3D-Umriss entsteht keine Fläche
+- [Ein Geschoss braucht vier Zeilen](hottgenroth-geschosse.md) — `BmFloor` allein genügt nicht; Oberfläche liest Geschossliste aus der Zeichnung
+- [Dachtypen: was geht, was noch nicht](hottgenroth-dachtypen-stand.md) — laufende Liste, beim Dazulernen fortschreiben
+- [Räume sind anlegbar](raeume-sind-anlegbar.md) — die alte Gegenbehauptung ist widerlegt; HottCAD ergänzt Bauteilverweise selbst
+- [Nebengebäude liegen im BmMedia-Blob](hottgenroth-nebengebaeude.md) — kein Bauteil, keine Angrenzung; HottCAD schreibt Umgebung erst beim Schließen
+- [Schornsteine sind ausgeklammert](schornsteine-ausgeklammert.md) — entschieden, nicht offen; nicht mehr als Lücke melden
+- [Projekt aus der Vorlage anlegen](projekt-aus-vorlage-importieren.md) — `Vorlage-Leeres-Projekt.sqproj` kopieren, Namen in der Datei setzen, Brücke lokal aufrufen
+- [Lage-Datei ist Pflicht](lage-steckbrief-pflicht.md) — fünf Spalten je Gebäude; fehlen Angaben → anhalten statt raten
+- [Unterlagen unvollständig → anhalten](unterlagen-unvollstaendig-anhalten.md) — fehlen Grundrisse, Fensterliste oder DENA-Liste: nicht auslesen, Aufgabe an Dennis
+- [Partnerlisten sind Hinweis, nicht Beleg](partnerlisten-sind-hinweis.md) — DENA-Checkliste + Fensterliste vom Partner: gegenprüfen, Widersprüche vorlegen
+- [Erst selbst lösen, dann fragen](erst-selbst-loesen-dann-fragen.md) — steht die Antwort im Material? Herauslesen. Nur Ortskenntnis/Entscheidungen werden zur Aufgabe
+- [Fenster-g-Wert kommt aus dem Katalog](fenster-g-wert-kommt-aus-dem-katalog.md) — Quelle ist das Katalogbauteil, nicht `BmElementWindow.GValue`; sonst fallen solare Gewinne auf null
+- [Nach der Zeichnung zwei Subtasks](nach-der-zeichnung-zwei-subtasks.md) — Fragentabelle + Auftrag für Zonen/Raumstempel, beide an Dennis
+- [iSFP: „keine regenerativen Energien"](isfp-regenerativ-haekchen.md) — Häkchen im Energieberater, nicht von der Anlagentechnik; sechsmal vorhanden, App liest Zielzustand
+- [iSFP-Export prüfen](isfp-export-pruefen.md) — `iSFP2.xml` in `PrMedia.Media`; Prüfmeldungen stehen in `MeinSanierungsfahrplan.exe`
+- [Energie.exe zeigt ihre Formulare](energie-exe-delphi-formulare.md) — DFM als ASCII in der EXE; Elementnamen + Hints = eingegeben vs. gerechnet
+- [MeinSanierungsfahrplan ist zerlegt](isfp2-dekompiliert.md) — Korpus unter `C:\Projekte_Dev\isfp2-decompiled`; gültiges XSD steckt in der EXE
+- [„Paket spart fast nichts" prüfen](dachschritt-einsparung-plausibel.md) — k = ΔQ_h/(A·ΔU); Dach/OGD Median 70 über 15 Projekte; Quelle je Paket ist `iSFP2.xml`
+- [Spiegel nach Bauteilabruf unverändert](hottgenroth-abruf-diagnose.md) — fast immer zu früh gelesen oder nicht gespeichert; `stand.letzter_abruf` sagt es seit 15.09.2026
+- [Werkzeugkette für Sanierungsvarianten](sanierungsvarianten-werkzeugkette.md) — fünf Skripte; `uwerte-uebernehmen.ps1` ist der Schritt, den man vergisst
+- [Eine Maßnahme hat acht Felder](sanierungsmassnahme-acht-felder.md) — Sowieso-Kosten: `SANKOSTEN − SANKOSTEN_EE`, auf Bruttofläche `FLAECHE_BR`
+- [Varianten sind Schnappschüsse](varianten-sind-schnappschuesse.md) — Abgleich deckt nur Bauteiltabelle; eine Maßnahme stirbt mit ihrem Bauteil
+- [Sammlungen im IBP-Modell schreiben](ibp-sammlungen-schreiben.md) — `ibp-sammlung.exe`; `enumAmbientType = 2` ohne Zoneneintrag lässt Verluste still durchfallen
+- [Verbrauchsfaktor und Energiekosten](verbrauchsfaktor-energiekosten.md) — f_v greift nur auf Heizung, wird nicht gespeichert; f_v ≈ 0,3 ist Symptom, kein Messwert
+- [Ein iSFP durchläuft drei Programme](isfp-drei-stufen.md) — Eingabemaske bei Hottgenroth (`TFormAusdr_iSFP20`); `.mSFPprojekt` ist die `iSFP2.xml`
+- [Die iSFP-XML kann eine Bibliothek schreiben](isfp-kernel-exporteur.md) — `CreateCertificateSFP` im IBP-Kernel, COM-sichtbar; ohne `JAZ`/`ETA_s35`/`ETA_s55`
+- [Byte-treue Dateien brauchen `-text`](byte-treue-dateien-gitattributes.md) — `* text=auto eol=lf` schreibt CRLF um und bricht jede Prüfsumme
+- [Varianten vollständig prüfen](variantenanalyse-quellen.md) — Anlagenkosten in `TableAnlage`; gleiche Eingaben, andere Ergebnisse = nicht neu gerechnet
+- [Der Bauteilspiegel ist die Kostengrundlage](bauteilspiegel-ist-die-kostengrundlage.md) — `hottgenroth_bauteil_flaechen` trägt Kennung, Bruttofläche und Hüllen-Flag
+- [HT'-Grenzwert wandert mit](ht-strich-referenz-wandert-mit.md) — Referenzgebäude teilt Geometrie; Wärmebrückenzuschlag schlägt voll durch
+- [Dachfläche endet an der Drempellinie](dachflaeche-endet-an-der-drempellinie.md) — bei Abseiten fehlt Dachfläche ohne Ersatzfläche; drei Zahlen vergleichen
+- [Güte der Tectly-Grundrisserkennung](tectly-grundrisserkennung-guete.md) — Maßstab auf 0,02 % genau; Schräglage, Wandbänder, Fenstermaße tragen nicht
+- [Energie.exe: nur vier Aufrufparameter](energie-exe-aufrufparameter.md) — `-prmprojectguid` & Co. wählen nur das Projekt; Export/Stillbetrieb gibt es nicht
+- [Aufträge mit shell.run](auftraege-mit-shell-run.md) — Vorgangsdeutung hält ihn immer für schreibend (`meta.schreibt_ab` Pflicht)
+- [Leitungslage fehlt im Austauschformat](leitungslage-nicht-im-austauschformat.md) — Fabrik setzt alle Rohre auf „unbeheizt"; zwei Schritte je Rohr für „in Zone"
+- [`-Vorschau` braucht `-Zurueck`](container-vorschau-braucht-zurueck.md) — allein holt `container.ps1` neu und überschreibt Arbeitsordner; Blobs außerhalb `arbeit/`
+- [Format der iSFP-Textbausteine](isfp-textbausteine-format.md) — Klartext, Gruppe = Bauteilkategorie, zwei Trennkonventionen; `das_bringt_es` 400 Zeichen
+- [BEG-EM-Mindest-U-Werte](beg-em-mindest-uwerte.md) — Richtlinie 17.08.2026: AW 0,20 / OGD 0,14 / Kellerdecke 0,25 / Fenster 0,95 / Tür 1,3
+- [VarianteID zeigt auf den Ist-Zustand](varianteid-verweist-auf-ist-zustand.md) — kein Zähler: alle Varianten tragen PROJEKT_ID des Ist-Zustands
+- [Wärmebrückenzuschlag steht an zwei Stellen](mp5-waermebrueckenzuschlag-005.md) — `TableHausDat.BERUECKSWB` nur Anzeige; gerechnet wird `Zones[0].enumModeThermalBridge` im Blob (3 = 0,05)
+- [Varianten brauchen Umlaute](varianten-umlaute.md) — BDExit ist CP1252, ä/ö/ü/ß tragen; keine ASCII-Umschrift in VarianteBez und SANBEZ
+- [Hottgenroth-Updater hat eine stille CLI](hottgenroth-update-download-cli.md) — `/qn` lädt+installiert alles Neueste ohne Interaktion; Code 14 = läuft schon, nie abschießen
+- [Werkzeug: iSFP-Texte füllen](isfp-texte-werkzeug.md) — `isfp-texte-fuellen.ps1`; Hülle aus Container, Anlagentechnik nur aus der XML
+- [iSFP-Komponenten kommen aus dem Container](isfp-komponenten-kommen-aus-dem-container.md) — Maske legt an, wo sich `SANBEZ`/`Beschr_Heiz/Wass/Luft` ändert; `InvestKostenText` nur Beträge
+- [Technikpaket braucht einen Anker](isfp-technikpaket-braucht-anker.md) — Paket ohne Änderung an `SANBEZ`/`Beschr_Heiz/Wass/Luft` bleibt im iSFP leer
+- [Ein Feld wirklich entfernen](bdexit-feld-entfernen.md) — Anwesenheitskarte: 2 Bit je Feld, 2 = fehlt; `setze-massnahme -Loeschen` nullt nur
+- [¶ gehört nicht in die iSFP-XML](isfp-pilcrow-nicht-in-die-xml.md) — Bausteinkonvention; `<br>` in Beschreibung/Zu beachten, sonst LF
+- [Kostenpositionen kommen aus TableHuellfl](isfp-kostenpositionen-aus-huellfl.md) — `einzelPositionen` sind Dialogdaten (0 im Rohexport); `foerderungMoeglich` nicht vergessen
+- [Beraterstammdaten sind verrutscht](beraterstammdaten-verrutscht.md) — Energie.exe schreibt firma/Name/Straße um eins verschoben; `stammdaten.json` überschreibt
+- [Aus der Druckanwendung fließt nichts zurück](druckanwendung-fliesst-nicht-zurueck.md) — beim Speichern alle Bilder auf ~300 px; Paketnamen + Skizzen gingen verloren
+- [iSFP-Bilder: zwei getrennte Wege](isfp-bilder-zwei-wege.md) — Fotos in `PrMedia` 14/15; Skizzen direkt in der XML; leerer Foto-Stream ist normal
+- [Druckapplikation fernsteuern](isfp-druckapplikation-fernsteuern.md) — `--infile/--create-pdf/--outfile-sfp/--logfile`; Logfile ist der maßgebliche Prüfbericht
+- [Lüftung setzen: ibp-rv-setzen](lueftung-ibp-rv-setzen.md) — Werkzeug allein genügt nicht: lässt `enRVSystem` auf `ExhaustSystem`, Kern verwirft WRG vollständig
+- [Rechenlauf ohne Oberfläche](rechenlauf-ohne-oberflaeche.md) — läuft; Qh trifft Container auf kWh; schreibt nicht zurück, rechnet nur BIM-Gebäude
+- [Ergebnisse gehören der Software](container-ergebnisse-gehoeren-der-software.md) — Öffnen+Speichern überschreibt 6 von 9 Tabellen; `PrMedia.StampEdit` verrät, wer schrieb
+- [HUELL_ID ist flüchtig](container-ergebnisse-gehoeren-der-software.md) — jedes Speichern legt Bauteiltabelle mit neuen IDs neu an; immer über `KENNZEICHEN`/`BAUTEILBEZ`
+- [Agent kann sich Dateien holen](agent-kann-dateien-holen.md) — `http.download` liefert beliebige Dateien; `.ps1`-Positivliste gilt nur für Uploads
+- [Die Bauteilkette braucht eine einzige .exe](bauteilkette-braucht-eine-exe.md) — alles PowerShell außer `ibp-uwert-setzen.exe`; der ist der Schritt, der die Zahl bewegt
+- [Lesefallen am IBP-Blob](ibp-blob-lesefallen.md) — `OperatingData` nicht serialisiert; `fValue` nur bei Energien Jahressumme; Zonen-Ergebnisschicht fehlt
+- [Holz im Ist macht jede Wärmepumpe schlecht](holz-im-ist-macht-waermepumpe-schlecht.md) — GEG-Faktorik (0,2/1,8 und 20/560 g), kein Rechenfehler; drei Prüfungen statt Fehlersuche
+- [Ökobilanz-Sperre meint den Kernel-Nachlauf](oekobilanz-sperre-kernel-nachlauf.md) — „Energieberater-Berechnung fehlerhaft" = jede Ausnahme beim Neu-Durchrechnen; `MediaSize` lügt
+- [EPD-Liste steckt in der DLL](epd-liste-steckt-in-der-dll.md) — Auswahlliste als CSV in `…LCA.DataAccess.EPD.dll`; ÖKOBAUDAT 2020 II 947 von 994
+- [Sommerlichen Wärmeschutz bestätigen](sommerlicher-waermeschutz-bestaetigen.md) — Häkchen in Zone → Reiter „Nutzung"; nicht mit dem auf Reiter Kühlung verwechseln
+- [Erzeugtes PowerShell: zwei Fallen](erzeugtes-powershell-zwei-fallen.md) — Backtick nur in `"…"`, Operator am Zeilenende; `get_vorgang` las Schrittzahl aus `progress_message`
+- [ECO-CAD-Daten sind lesbar](eco-cad-daten-lesbar.md) — `FmLCA` → `FmLCAElementGroup` → `FmLCAElement` → `TcEPD.DataSetUId`; `Quantity` in EPD-Einheit
+- [Smart App Control blockiert den Agenten](smart-app-control-blockiert-agenten.md) — `VerifiedAndReputablePolicyState` beendet die Suche in einer Zeile
+- [Projekt als .sqproj exportieren](projektexport-api.md) — `TFWMgrProjectExport.Export` Einzeiler; `TFWMgrMaster.Initialize()` schreibt per `UpgradeSchema()` in die DB
+- [Versehentlich Gelöschtes retten](rettung-geloeschtes-wiederholen.md) — Prozess abschießen statt Fenster schließen; `Sichere-Projektdatenbank.ps1` läuft bei offener Software
+- [Klenke: entschieden, nicht offen](klenke-entschieden-nicht-offen.md) — `F 008-1` mit U 5,00 und MP6 ohne CAD-Bindung sind abgenickt; nicht erneut als Lücke melden
+- [Schichtloses Bauteil verliert seinen U-Wert](schichtloses-bauteil-verliert-u-wert.md) — Rsi/Rse als Zahlen statt Sentinel → 1/0,17 = 5,88; sechs Felder zur Reparatur, 199 Bauteile
+- [CAD-Bindung sperrt die Variante](cad-bindung-sperrt-die-variante.md) — `TableZusatz.ProjektPfad3D = Art=CAD`; kein fehlendes Sanierungs-Flag
+- [Variantennummer ist flüchtig](varianten-nummer-ist-fluechtig.md) — `PROJEKT_ID` wird beim Löschen neu vergeben; Varianten über den Namen adressieren
+- [Leeres Projekt bootstrappen](leeres-hottgenroth-projekt-bootstrappen.md) — Zeichenwerkzeuge brauchen Vorlagen IM Projekt; Fremdkopie mit vier Überschreibungen, Katalog-GUIDs sind global
+- [Simic: Hülle importiert](simic-hottcad-import.md) — 13.10.2026; offene Fragen in Asana 1219469748957362, Dachfenster/Zonen bei Dennis
+- [§ 51-Erweiterungsnachweis in Hottgenroth](geg-erweiterungsnachweis-hottgenroth.md) — zwei Häkchen im Zonen-Dialog („EnEV §9 Abs.5"); Kernel überspringt unmarkierte Zonen, H_T'_max = 1,2× Referenz
+- [SAAKD Tchounet: Stand WSN](saakd-tchounet-stand.md) — Hottgenroth-Projekt leer, Bauteilplan recherchiert (14.10.2026); Typologie „Neubau" matcht jedes Baujahr
+- [Krause 3QHTK: Neubau-Import](krause-3qhtk-neubau.md) — Geometrie 14.10. eingespielt, Bauteile 100009-100012; nach erstem Öffnen zuweisen, EH40 braucht Wand 24 cm
+- [Haustrennwand-Werkzeug](haustrennwand-werkzeug.md) — Set-Haustrennwand.ps1: VIER Felder (nicht zwei) + Nebengebäude; Probelauf grün, Echtlauf aus; 4 Dateien uncommitted
+- [iSFP 6K4YN Hudlberger: Stand](hudlberger-6k4yn-stand.md) — nur Anbau gezeichnet, 0 Zonen; Plan für set_hottgenroth_raeume erprobt; Bauteil-IDs stehen
+- [Dennis gibt alle Rechte](dennis-gibt-alle-rechte.md) — 18.10.2026: Echtläufe nach grünem Probelauf direkt fahren, nicht vorlegen; Prod-Aktionen bleiben ausgenommen
+- [Treppen setzen](hottgenroth-treppen.md) — ElementType 10, 5 Zeilen + assistant_data; New-Treppe.ps1 (Kopiermuster); Deckenöffnung beim ersten Echtlauf prüfen
+- [ECO-CAD: Dichte steuert Bezugsmenge](eco-cad-dichte-steuert-bezugsmenge.md) — Schichtdichte = EPD-Rohdichte, sonst Faktor 30; Endenergie brutto + PV-Anrechnung getrennt

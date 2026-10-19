@@ -1,0 +1,16 @@
+{
+  "_zweck": "Anlagenkosten je Variante fuer TableAnlage.InvestKostenText. Genau dieses Feld entscheidet, ob die iSFP-Maske fuer ein Paket eine Anlagen-Komponente anlegt - an Hesse gemessen: wo eine Kostenzeile neu hinzukommt, entsteht die Komponente; wo das Feld leer ist, meldet die Maske 'enthaelt keine Massnahmenkomponenten'.",
+  "_format": "Bezeichnung|Invest|Invest_EE|Betrieb  — Invest = Vollkosten, Invest_EE = energiebedingter Anteil (Vollkosten minus Sowieso), Betrieb = jaehrliche Betriebskosten.",
+  "_kumulativ": "Varianten sind kumulativ. Unter 'ab' steht, ab welchem Paket eine Zeile gilt; das Werkzeug traegt sie in dieses und alle folgenden Pakete ein.",
+
+  "V4DZX_Nadine Klenke": {
+    "_quelle": "Beraterliste V4DZX_Klenke_Massnahmenpakete.csv vom 26.09.2026. Invest_EE = Vollkosten minus 'Sowieso angesetzt'.",
+    "zeilen": [
+      { "ab": 2, "bezeichnung": "Photovoltaik (PV) Anlage 10 kWp",              "invest": 18300, "invest_ee": 18300, "betrieb": 0 },
+      { "ab": 2, "bezeichnung": "Stromspeicher 10 kWh",                          "invest": 7600,  "invest_ee": 7600,  "betrieb": 0 },
+      { "ab": 4, "bezeichnung": "Wärmepumpe (WP LW) Luft 7 kW mit Warmwasser",   "invest": 29100, "invest_ee": 13544, "betrieb": 0 },
+      { "ab": 4, "bezeichnung": "Hydraulischer Abgleich - 12 Heizkörper",        "invest": 2700,  "invest_ee": 0,     "betrieb": 0 },
+      { "ab": 5, "bezeichnung": "Lüftungsanlage mit WRG, dezentral - 6 Anlagen", "invest": 13200, "invest_ee": 12300, "betrieb": 0 }
+    ]
+  }
+}

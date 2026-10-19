@@ -1,0 +1,907 @@
+{
+    "_zweck": "Verbindet die Sanierungsvarianten aus der Hottgenroth-Datenbank mit den eigenen Textbausteinen und den Prinzipskizzen. Quelle sind der Container (eberater.zip: SANBEZ, KENNZEICHEN je Variante) und die iSFP-XML (Anlagentechnik je Paket) - keine Beraterliste.",
+    "_stand": "2026-09-26. Regeln an 46 Massnahmen aus Baumoehl, Hesse, Koehn und Klenke gemessen.",
+    "_aufbau": {
+        "bausteine": "Schluessel ist der Name des Bausteins in Texte_iSFP_Kompo_Beschreibung.txt. zu_beachten wird getrennt gefuehrt, weil die Namen in den beiden Dateien nur zu 35 von 46 uebereinstimmen.",
+        "huelle": "Geordnete Regeln auf SANBEZ. Die ERSTE passende gewinnt, deshalb steht das Spezifische vorn (Dachfenster vor Fenster, Perimeter vor Kellerwand). Vor dem Vergleich werden beide Seiten entumlautet: der Container schreibt 'Haustuer', die Bausteine 'Haustür'.",
+        "anlagen": "Die Anlagentechnik steht nicht im Container, sondern je Paket in der iSFP-XML. Erkannt wird der UEBERGANG gegenueber dem vorigen Paket.",
+        "skizzen": "[erstes, zweites] Bild als Dateiname ohne Endung aus Maßnahmenbilder/. null = kein Bild.",
+        "art": "Nur diese sieben: SK_WAND, SK_DACH, SK_FENSTER, SK_BODEN, SK_LUEFTUNG, SK_WARMWASSER, SK_HEIZUNG. Fuer PV gibt es keine eigene - sie laeuft unter SK_HEIZUNG mit.",
+        "komponente": "Ueberschrift der Komponente. Massnahmen mit gleicher Ueberschrift in einem Paket werden zu EINER Komponente mit bis zu drei Ausfuehrungen.",
+        "projektweit": "Felder, die einmal je Projekt gelten. Schluessel ist der XPath unter /iSFP-Projekt, Wert die Bausteindatei ohne Endung. Enthaelt die Datei genau einen langen Text, wird er gesetzt; enthaelt sie mehrere kurze Zeilen, ist das eine Auswahl und bleibt dem Berater ueberlassen. \"verbinden\" heisst: die Zeilen sind Absaetze EINES Textes und werden zusammengefuegt.",
+        "handgeschrieben": "Felder, die nur im iSFP-Dialog stehen und aus dem Rechenmodell nicht zurueckkommen. \"Erfassung zuruecksetzen\" loescht sie. Mit -Uebernehmen <alteXml> holt das Werkzeug sie aus einer frueheren Fassung zurueck - aber nur, wo das Ziel leer ist.",
+        "herleitung": "Auswahlfelder, die sich aus dem Modell ergeben. Je Feld eine geordnete Regelliste; die erste passende gewinnt. \"quelle\" ist ein XPath unter /iSFP-Projekt oder \"heizung:<Feld>\" fuer den Ist-Satz aus TableHeizung im Container. \"ist\" vergleicht genau, \"enthaelt\" als Teilstring (beides ohne Umlaute und Gross-/Kleinschreibung). Felder, die hier fehlen, kann nur der Berater entscheiden - Bauart von Wand und Fenster steht im Energiemodell nicht, ebenso wenig Kellerabgang, Lage, Zustand und das Nutzerverhalten."
+    },
+    "bausteine": {
+        "Die oberste Geschossdecke": {
+            "zu_beachten": "Dämmung der obersten Geschossdecke nicht begehbar",
+            "bringt_es": "OBERSTE GESCHOSSDECKE",
+            "art": "SK_DACH",
+            "komponente": "Oberste Geschossdecke dämmen",
+            "skizzen": [
+                "OGD - Ausgangslage",
+                "OGD - Sanierungsmaßnahme"
+            ]
+        },
+        "Decken gegen Außenluft": {
+            "zu_beachten": null,
+            "bringt_es": "OBERSTE GESCHOSSDECKE",
+            "art": "SK_DACH",
+            "komponente": "Decke gegen Außenluft dämmen",
+            "skizzen": [
+                "Decke gegen Luft - Ausgangslage",
+                "Decke gegen Luft - Sanierungsmaßnahme"
+            ]
+        },
+        "Aufsparrendämmung": {
+            "zu_beachten": "Aufsparrendämmung",
+            "bringt_es": "DACH / OGD",
+            "art": "SK_DACH",
+            "komponente": "Dach dämmen",
+            "skizzen": [
+                "Dach - Ausgangslage",
+                "Aufsparrendämmung - Sanierungsmaßnahme"
+            ]
+        },
+        "Untersparrendämmung": {
+            "zu_beachten": "Untersparrendämmung",
+            "bringt_es": "DACH / OGD",
+            "art": "SK_DACH",
+            "komponente": "Dach dämmen",
+            "skizzen": [
+                "Dach - Ausgangslage",
+                "Untersparrendämmung - Sanierungsmaßnahme"
+            ]
+        },
+        "Zwischensparrendämmung": {
+            "zu_beachten": "Zwischensparrendämmung",
+            "bringt_es": "DACH / OGD",
+            "art": "SK_DACH",
+            "komponente": "Dach dämmen",
+            "skizzen": [
+                "Dach - Ausgangslage",
+                "Zwischensparrendämmung - Sanierungsmaßnahme"
+            ]
+        },
+        "Flachdachdämmung": {
+            "zu_beachten": "Flachdachdämmung",
+            "bringt_es": "DACH / OGD",
+            "art": "SK_DACH",
+            "komponente": "Dach dämmen",
+            "skizzen": [
+                "Flachdach massiv - Ausgangslage",
+                "Flachdach massiv - Sanierungsmaßnahme"
+            ]
+        },
+        "WDVS Wärmedämmung": {
+            "zu_beachten": "WDVS Wärmedämmung",
+            "bringt_es": "AUSSENWÄNDE",
+            "art": "SK_WAND",
+            "komponente": "Außenwände dämmen mit WDVS",
+            "skizzen": [
+                "Außenwand - Ausgangslage",
+                "Wärmedämmverbundsystem - Sanierungsmaßnahme"
+            ]
+        },
+        "Einblasdämmung": {
+            "zu_beachten": "Einblasdämmung",
+            "bringt_es": "AUSSENWÄNDE",
+            "art": "SK_WAND",
+            "komponente": "Außenwände dämmen mit Einblasdämmung",
+            "skizzen": [
+                "Zweischalige Wand - Ausgangslage",
+                "Einblasdämmung - Sanierungsmaßnahme"
+            ]
+        },
+        "Innendämmung": {
+            "zu_beachten": "Innendämmung",
+            "bringt_es": "AUSSENWÄNDE",
+            "art": "SK_WAND",
+            "komponente": "Außenwände dämmen mit Innendämmung",
+            "skizzen": [
+                "Außenwand - Ausgangslage",
+                "Innendämmung"
+            ]
+        },
+        "Vorhangfassade (Gaube)": {
+            "zu_beachten": "Vorhangfassade (Gauben)",
+            "bringt_es": "AUSSENWÄNDE",
+            "art": "SK_WAND",
+            "komponente": "Gaubenwände dämmen",
+            "skizzen": [
+                "Gaubenwand - Ausgangslage",
+                "Gaubenwand - Sanierungsmaßnahme"
+            ]
+        },
+        "Denkmalwände": {
+            "zu_beachten": "Denkmalwände",
+            "bringt_es": "AUSSENWÄNDE",
+            "art": "SK_WAND",
+            "komponente": "Außenwände dämmen mit Innendämmung",
+            "skizzen": [
+                "Fachwerk - Ausgangslage",
+                "Innendämmung Fachwerk - Sanierungsmaßnahme"
+            ]
+        },
+        "Gerüst": {
+            "zu_beachten": "Gerüst",
+            "bringt_es": "AUSSENWÄNDE",
+            "art": "SK_WAND",
+            "komponente": "Außenwände dämmen mit WDVS",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Kellerdecke": {
+            "zu_beachten": "Kellerdecke",
+            "bringt_es": "KELLER",
+            "art": "SK_BODEN",
+            "komponente": "Kellerdecke dämmen",
+            "skizzen": [
+                "Geschossdecke - Ausgangslage",
+                "Geschossdecke unterhalb - Sanierungsmaßnahme"
+            ]
+        },
+        "Bodenplatte": {
+            "zu_beachten": "Bodenplatte",
+            "bringt_es": "KELLER",
+            "art": "SK_BODEN",
+            "komponente": "Bodenplatte dämmen",
+            "skizzen": [
+                "Bodenplatte - Ausgangslage",
+                "Bodenplatte - Sanierungsmaßnahme"
+            ]
+        },
+        "Perimeterdämmung": {
+            "zu_beachten": "Perimeterdämmung",
+            "bringt_es": "KELLER",
+            "art": "SK_WAND",
+            "komponente": "Kellerwände dämmen",
+            "skizzen": [
+                "Kellerwand - Ausgangslage",
+                "Perimeterdämmung - Sanierungsmaßnahme"
+            ]
+        },
+        "Kellerwand Innendämmung": {
+            "zu_beachten": "Kellerinnenwand",
+            "bringt_es": "KELLER",
+            "art": "SK_WAND",
+            "komponente": "Kellerwände dämmen",
+            "skizzen": [
+                "Kellerwand - Ausgangslage",
+                null
+            ]
+        },
+        "Ältere Fenster tauschen": {
+            "zu_beachten": "Ältere Fenster tauschen",
+            "bringt_es": "FENSTER / HAUSTÜR",
+            "art": "SK_FENSTER",
+            "komponente": "Fenster austauschen",
+            "skizzen": [
+                "Fenster 2-fach Verglast ohne wsv",
+                "Fenster 3-fach Verglasung mit wsv"
+            ]
+        },
+        "Ältere Fenster inkl. Rollladenkästen tauschen": {
+            "zu_beachten": "Ältere Fenster inkl. Rollladenkästen tauschen",
+            "bringt_es": "FENSTER / HAUSTÜR",
+            "art": "SK_FENSTER",
+            "komponente": "Fenster austauschen",
+            "skizzen": [
+                "Fenster 2-fach Verglast ohne wsv",
+                "Fenster 3-fach Verglasung mit wsv"
+            ]
+        },
+        "Dachfenster austauschen": {
+            "zu_beachten": "Dachfenster austauschen",
+            "bringt_es": "FENSTER / HAUSTÜR",
+            "art": "SK_FENSTER",
+            "komponente": "Dachfenster austauschen",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Kastenfenster ertüchtigen": {
+            "zu_beachten": null,
+            "bringt_es": "FENSTER / HAUSTÜR",
+            "art": "SK_FENSTER",
+            "komponente": "Kastenfenster ertüchtigen",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Haustür austauschen": {
+            "zu_beachten": "Haustür austauschen",
+            "bringt_es": "FENSTER / HAUSTÜR",
+            "art": "SK_WAND",
+            "komponente": "Außentüren austauschen",
+            "skizzen": [
+                "Haustür - Sanierungsmaßnahme",
+                null
+            ]
+        },
+        "Innentüren austauschen": {
+            "zu_beachten": "Innentüren austauschen",
+            "bringt_es": "FENSTER / HAUSTÜR",
+            "art": "SK_WAND",
+            "komponente": "Außentüren austauschen",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Heizungsoptimierung": {
+            "zu_beachten": "Heizungsoptimierung",
+            "bringt_es": "HEIZUNGSOPTIMIERUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizungsoptimierung",
+            "skizzen": [
+                "Hydraulischer Abgleich - Sanierungsmaßnahme",
+                null
+            ]
+        },
+        "Heizkörper austauschen": {
+            "zu_beachten": "Heizkörper austauschen",
+            "bringt_es": "HEIZUNGSOPTIMIERUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizungsoptimierung",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Rohrleitungsdämmung": {
+            "zu_beachten": "Rohrleitungsdämmung",
+            "bringt_es": "HEIZUNGSOPTIMIERUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizungsoptimierung",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Heizflächenprüfung und Öltankrückbau": {
+            "zu_beachten": "Heizflächenprüfung und Öltankrückbau",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Ölheizung -> Luft-Wärmepumpe": {
+            "zu_beachten": "Ölheizung -> Luft-Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Außeneinheit Luft-Wasser Wärmepumpe",
+                null
+            ]
+        },
+        "Ölheizung -> Sole-Wärmepumpe": {
+            "zu_beachten": "Ölheizung -> Sole-Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Sole-Wasser-Wärmepumpe",
+                null
+            ]
+        },
+        "Ölheizung -> Holzpelletheizung": {
+            "zu_beachten": "Ölheizung -> Holzpelletheizung",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Biomassenheizung",
+                "Pellet als Brennstoff"
+            ]
+        },
+        "Gasbrennwert -> Luft-Wärmepumpe": {
+            "zu_beachten": "Gasbrennwert -> Luft-Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Außeneinheit Luft-Wasser Wärmepumpe",
+                null
+            ]
+        },
+        "Gasbrennwert -> Sole-Wärmepumpe": {
+            "zu_beachten": "Gasbrennwert -> Sole-Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Sole-Wasser-Wärmepumpe",
+                null
+            ]
+        },
+        "Gasheizwert -> Luft-Wärmepumpe": {
+            "zu_beachten": "Gasheizwert -> Luft-Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Außeneinheit Luft-Wasser Wärmepumpe",
+                null
+            ]
+        },
+        "Gasheizwert -> Sole-Wärmepumpe": {
+            "zu_beachten": "Gasheizwert -> Sole-Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                "Sole-Wasser-Wärmepumpe",
+                null
+            ]
+        },
+        "Aktuelle Heizung -> Fernwärme": {
+            "zu_beachten": "Aktuelle Heizung -> Fernwärme",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_HEIZUNG",
+            "komponente": "Heizung austauschen",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Heizung alt -> Wärmepumpe": {
+            "zu_beachten": "Heizung alt -> Wärmepumpe",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_WARMWASSER",
+            "komponente": "Warmwasser",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Heizung alt -> Solarthermie": {
+            "zu_beachten": null,
+            "bringt_es": "SOLARTHERMIE",
+            "art": "SK_WARMWASSER",
+            "komponente": "Warmwasser",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Heizung alt -> Holzpelletheizung neu": {
+            "zu_beachten": "Heizung alt -> Holzpelletheizung neu",
+            "bringt_es": "HEIZUNG",
+            "art": "SK_WARMWASSER",
+            "komponente": "Warmwasser",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "Dezentrale Lüftungsanlage": {
+            "zu_beachten": "Dezentrale Lüftungsanlage",
+            "bringt_es": "LÜFTUNG",
+            "art": "SK_LUEFTUNG",
+            "komponente": "Lüftungsanlage dezentral",
+            "skizzen": [
+                "Lüftungsanlage mit Wärmerückgewinnung",
+                null
+            ]
+        },
+        "Luftdichtheitstest (Blower-Door)": {
+            "zu_beachten": "Luftdichtheitstest (Blower-Door)",
+            "bringt_es": "LÜFTUNG",
+            "art": "SK_LUEFTUNG",
+            "komponente": "Lüftungsanlage dezentral",
+            "skizzen": [
+                null,
+                null
+            ]
+        },
+        "PV-Anlage": {
+            "zu_beachten": "PV-Anlage",
+            "bringt_es": "PHOTOVOLTAIK",
+            "art": "SK_HEIZUNG",
+            "komponente": "Photovoltaikanlage",
+            "skizzen": [
+                "PV-Anlage",
+                null
+            ]
+        },
+        "Stromspeicher": {
+            "zu_beachten": "Stromspeicher",
+            "bringt_es": "PHOTOVOLTAIK",
+            "art": "SK_HEIZUNG",
+            "komponente": "Photovoltaikanlage",
+            "skizzen": [
+                "PV-Speicher - Sanierungsmaßnahme",
+                null
+            ]
+        }
+    },
+    "huelle": [
+        {
+            "muster": "dachfenster|dachflaechenfenster|\\bdff\\b",
+            "kennzeichen": [
+                "FA",
+                "DF"
+            ],
+            "baustein": "Dachfenster austauschen"
+        },
+        {
+            "muster": "kastenfenster",
+            "kennzeichen": [
+                "FA"
+            ],
+            "baustein": "Kastenfenster ertüchtigen"
+        },
+        {
+            "muster": "rollladen",
+            "kennzeichen": [
+                "FA"
+            ],
+            "baustein": "Ältere Fenster inkl. Rollladenkästen tauschen"
+        },
+        {
+            "muster": "fenster|scheiben|verglas",
+            "kennzeichen": [
+                "FA"
+            ],
+            "baustein": "Ältere Fenster tauschen"
+        },
+        {
+            "muster": "haustuer|hauseingang",
+            "kennzeichen": [
+                "TA"
+            ],
+            "baustein": "Haustür austauschen"
+        },
+        {
+            "muster": "innentuer|kellertuer|zimmertuer|tuer",
+            "kennzeichen": [
+                "TA",
+                "IT"
+            ],
+            "baustein": "Innentüren austauschen"
+        },
+        {
+            "muster": "perimeter",
+            "kennzeichen": [
+                "WE",
+                "WK"
+            ],
+            "baustein": "Perimeterdämmung"
+        },
+        {
+            "muster": "kellerwand|kellernwand|kellerinnenwand",
+            "kennzeichen": [
+                "WE",
+                "WK"
+            ],
+            "baustein": "Kellerwand Innendämmung"
+        },
+        {
+            "muster": "aufsparren",
+            "kennzeichen": [
+                "DA",
+                "DG"
+            ],
+            "baustein": "Aufsparrendämmung"
+        },
+        {
+            "muster": "flachdach|dachterrasse",
+            "kennzeichen": [
+                "DA",
+                "DG"
+            ],
+            "baustein": "Flachdachdämmung"
+        },
+        {
+            "muster": "zwischensparren|zwischen ?u\\.? ?unter|unter-? ?u(nd)?\\.? ?zwischen|zwischendaemmung",
+            "kennzeichen": [
+                "DA",
+                "DG"
+            ],
+            "baustein": "Zwischensparrendämmung"
+        },
+        {
+            "muster": "untersparren|unterdaemmung",
+            "kennzeichen": [
+                "DA",
+                "DG"
+            ],
+            "baustein": "Untersparrendämmung"
+        },
+        {
+            "muster": "balkon|gegen aussenluft|auskragend",
+            "kennzeichen": [
+                "DA",
+                "OG",
+                "BK"
+            ],
+            "baustein": "Decken gegen Außenluft"
+        },
+        {
+            "muster": "geschossdecke",
+            "kennzeichen": [
+                "OG",
+                "DA"
+            ],
+            "baustein": "Die oberste Geschossdecke"
+        },
+        {
+            "muster": "vorsatzblech|vorhang|gefach|gaubenwand",
+            "kennzeichen": [
+                "WA",
+                "DG"
+            ],
+            "baustein": "Vorhangfassade (Gaube)"
+        },
+        {
+            "muster": "denkmal|fachwerk",
+            "kennzeichen": [
+                "WA"
+            ],
+            "baustein": "Denkmalwände"
+        },
+        {
+            "muster": "einblas|kerndaemmung|granulat|zellulose",
+            "kennzeichen": [
+                "WA"
+            ],
+            "baustein": "Einblasdämmung"
+        },
+        {
+            "muster": "wdvs|waermedaemmverbund|aussendaemmung",
+            "kennzeichen": [
+                "WA"
+            ],
+            "baustein": "WDVS Wärmedämmung"
+        },
+        {
+            "muster": "innendaemmung|innenwanddaemmung",
+            "kennzeichen": [
+                "WA"
+            ],
+            "baustein": "Innendämmung"
+        },
+        {
+            "muster": "bodenplatte",
+            "kennzeichen": [
+                "BE",
+                "BK"
+            ],
+            "baustein": "Bodenplatte"
+        },
+        {
+            "muster": "von unten|kellerdecke|bekleidung",
+            "kennzeichen": [
+                "BK",
+                "WK",
+                "BE"
+            ],
+            "baustein": "Kellerdecke"
+        },
+        {
+            "muster": "innendaemmung|innenwanddaemmung",
+            "kennzeichen": [
+                "BK",
+                "WK",
+                "WE"
+            ],
+            "baustein": "Kellerwand Innendämmung"
+        }
+    ],
+    "anlagen": {
+        "_hinweis": "Erkannt wird der Uebergang gegenueber dem vorigen Paket. Luft- und Sole-Waermepumpe tragen in der XML beide HT_WP - ohne weitere Angabe wird Luft angenommen.",
+        "alt_aus_technik": {
+            "HT_KESSEL_BW": {
+                "Heizöl EL": "Ölheizung",
+                "Erdgas E": "Gasbrennwert",
+                "Erdgas LL": "Gasbrennwert"
+            },
+            "HT_KESSEL_NT": {
+                "Heizöl EL": "Ölheizung",
+                "Erdgas E": "Gasheizwert",
+                "Erdgas LL": "Gasheizwert"
+            },
+            "HT_KESSEL_STD": {
+                "Heizöl EL": "Ölheizung",
+                "Erdgas E": "Gasheizwert",
+                "Erdgas LL": "Gasheizwert"
+            }
+        },
+        "neu_aus_technik": {
+            "HT_WP": "Luft-Wärmepumpe",
+            "HT_NAH_FERNWAERME": "Fernwärme",
+            "HT_KESSEL_BW__Holzpellets": "Holzpelletheizung"
+        },
+        "fernwaerme_baustein": "Aktuelle Heizung -> Fernwärme",
+        "warmwasser": {
+            "TWT_WP": "Heizung alt -> Wärmepumpe",
+            "TWT_SOLARTHERMIE": "Heizung alt -> Solarthermie"
+        },
+        "lueftung": {
+            "LEK_WRG": "Dezentrale Lüftungsanlage",
+            "LEK_EFF_WRG": "Dezentrale Lüftungsanlage",
+            "LEK_SENS_EFF_WRG": "Dezentrale Lüftungsanlage",
+            "LEK_SENS_PH": "Dezentrale Lüftungsanlage"
+        },
+        "pv": "PV-Anlage"
+    },
+    "projektweit": {
+        "anschreiben": {
+            "datei": "Texte_iSFP_Anschreiben",
+            "verbinden": true
+        },
+        "ausgangsSituationFuerSanierung": {
+            "datei": "Texte_iSFP_AusgangsSituationFuerSanierung"
+        },
+        "nutzerHinweise": {
+            "datei": "Texte_iSFP_NutzerHinweise"
+        },
+        "heizungsOptimierung": {
+            "datei": "Texte_iSFP_HeizungsOptimierung"
+        },
+        "schritte": {
+            "datei": "Texte_iSFP_Schritte"
+        },
+        "hausZukunftBeschreibungVorteile": {
+            "datei": "Texte_iSFP_HausZukunftBeschreibungVorteile"
+        },
+        "fotos/freieErlaeuterung": {
+            "datei": "Texte_iSFP_FreieErlaeuterung"
+        },
+        "haustechnikplaner_grund": {
+            "datei": "Texte_iSFP_Haustechnikplaner_Grund"
+        },
+        "nutzereinfluss/fazit": {
+            "datei": "Texte_iSFP_Nutz_Fazit"
+        },
+        "nutzereinfluss/raumtemp": {
+            "datei": "Texte_iSFP_Nutz_Raumtemp"
+        },
+        "nutzereinfluss/warmwasser": {
+            "datei": "Texte_iSFP_Nutz_Warmwasser"
+        },
+        "nutzereinfluss/anwesenheit": {
+            "datei": "Texte_iSFP_Nutz_Anwesenheit"
+        },
+        "nutzereinfluss/raumnutzung": {
+            "datei": "Texte_iSFP_Nutz_Raumnutzung"
+        },
+        "nutzereinfluss/lueftverhalten": {
+            "datei": "Texte_iSFP_Nutz_Lueftverhalten"
+        },
+        "techDoku/beschr_dach": {
+            "datei": "Texte_iSFP_Beschr_Dach"
+        },
+        "techDoku/beschr_wand": {
+            "datei": "Texte_iSFP_Beschr_Wand"
+        },
+        "techDoku/beschr_fenster": {
+            "datei": "Texte_iSFP_Beschr_Fenster"
+        },
+        "techDoku/beschr_keller": {
+            "datei": "Texte_iSFP_Beschr_Keller"
+        },
+        "techDoku/beschr_kellerabgang": {
+            "datei": "Texte_iSFP_Beschr_kellerabgang"
+        },
+        "techDoku/beschr_heizung": {
+            "datei": "Texte_iSFP_Beschr_Heizung"
+        },
+        "techDoku/beschr_verteilung": {
+            "datei": "Texte_iSFP_Beschr_Verteilung"
+        },
+        "techDoku/beschr_tww": {
+            "datei": "Texte_iSFP_Beschr_TWW"
+        },
+        "techDoku/beschr_lueftung": {
+            "datei": "Texte_iSFP_Beschr_Lueftung"
+        },
+        "objekt/lage": {
+            "datei": "Texte_iSFP_Geb_Lage"
+        },
+        "objekt/bauweise": {
+            "datei": "Texte_iSFP_Geb_Bauweise"
+        },
+        "objekt/zustand2": {
+            "datei": "Texte_iSFP_Geb_Zustand"
+        }
+    },
+    "handgeschrieben": [
+        "architekt_grund",
+        "statiker_grund",
+        "schornsteinfeger_grund",
+        "holzschutzgutachter_grund",
+        "haustechnikplaner_grund",
+        "sonstPlanerSachVerst",
+        "grussformel",
+        "eigentuemer/briefanrede",
+        "nutzereinfluss/verbrauch_anmerkung",
+        "nutzereinfluss/Qe_anmerkung",
+        "bafa_berater_nr",
+        "bafa_vorgangs_nr",
+        "energieberater/firma",
+        "energieberater/vorNachname",
+        "energieberater/telefon",
+        "energieberater/email",
+        "energieberater/web",
+        "energieberater/StrasseHnr",
+        "energieberater/PLZ",
+        "energieberater/ort",
+        "objekt/baujahr_ergaenzung",
+        "fotos/freieErlaeuterung"
+    ],
+    "herleitung": {
+        "techDoku/beschr_heizung": [
+            {
+                "quelle": "heizung:Erz1Brennst",
+                "enthaelt": "heizoel",
+                "wert": "Ölheizung"
+            },
+            {
+                "quelle": "heizung:Erz1Brennst",
+                "enthaelt": "holzpellet",
+                "wert": "Pelletheizung"
+            },
+            {
+                "quelle": "anlagen/heizungen/item/technik",
+                "ist": "HT_WP",
+                "wert": "Wärmepumpe"
+            },
+            {
+                "quelle": "anlagen/heizungen/item/technik",
+                "ist": "HT_NAH_FERNWAERME",
+                "wert": "Fernwärme"
+            },
+            {
+                "quelle": "anlagen/heizungen/item/technik",
+                "ist": "HT_KESSEL_BW",
+                "wert": "Brennwert Erdgasheizung"
+            },
+            {
+                "quelle": "anlagen/heizungen/item/technik",
+                "ist": "HT_KESSEL_NT",
+                "wert": "Heizwert Erdgasheizung"
+            },
+            {
+                "quelle": "anlagen/heizungen/item/technik",
+                "ist": "HT_KESSEL_STD",
+                "wert": "Heizwert Erdgasheizung"
+            },
+            {
+                "quelle": "anlagen/heizungen/item/technik",
+                "ist": "HT_NACHTSPEICHER",
+                "wert": "Nachtspeicheröfen"
+            }
+        ],
+        "techDoku/beschr_verteilung": [
+            {
+                "quelle": "heizung:UbergabeText1",
+                "enthaelt": "radiator",
+                "wert": "Übergabe über Heizkörper"
+            },
+            {
+                "quelle": "heizung:UbergabeText1",
+                "enthaelt": "heizkoerper",
+                "wert": "Übergabe über Heizkörper"
+            },
+            {
+                "quelle": "heizung:UbergabeText1",
+                "enthaelt": "flaechenheiz",
+                "wert": "Übergabe über Fußbodenheizung"
+            },
+            {
+                "quelle": "heizung:UbergabeText1",
+                "enthaelt": "fussboden",
+                "wert": "Übergabe über Fußbodenheizung"
+            }
+        ],
+        "techDoku/beschr_tww": [
+            {
+                "quelle": "anlagen/tww/item/technik",
+                "ist": "TWT_SOLARTHERMIE",
+                "wert": "Zentral über Heizung, inkl. Solarthermie"
+            },
+            {
+                "quelle": "anlagen/tww/item/technik",
+                "ist": "TWT_ELEKTRO_DURCHLAUF",
+                "wert": "Durchlauferhitzer"
+            },
+            {
+                "quelle": "anlagen/tww/item/technik",
+                "ist": "TWT_GAS_DURCH",
+                "wert": "Durchlauferhitzer"
+            },
+            {
+                "quelle": "anlagen/tww/item/technik",
+                "ist": "TWT_ELEKTRO_SPEICHER",
+                "wert": "Elektrospeicher"
+            },
+            {
+                "quelle": "anlagen/tww/item/technik",
+                "enthaelt": "twt_kessel",
+                "wert": "Zentral über Heizung"
+            },
+            {
+                "quelle": "anlagen/tww/item/technik",
+                "ist": "TWT_WP",
+                "wert": "Zentral über Heizung"
+            }
+        ],
+        "techDoku/beschr_lueftung": [
+            {
+                "quelle": "anlagen/lueftung/item/anlagenTyp",
+                "ist": "LEK_FREI",
+                "wert": "Freie Lüftung über Fenster"
+            },
+            {
+                "quelle": "anlagen/lueftung/item/anlagenTyp",
+                "enthaelt": "lek_",
+                "wert": "Zentrale Lüftungsanlage"
+            }
+        ],
+        "techDoku/beschr_keller": [
+            {
+                "quelle": "objekt/keller",
+                "enthaelt": "nicht unterkellert",
+                "wert": "Nicht unterkellert"
+            },
+            {
+                "quelle": "objekt/keller",
+                "enthaelt": "nein",
+                "wert": "Nicht unterkellert"
+            },
+            {
+                "quelle": "objekt/keller",
+                "enthaelt": "unbeheizt",
+                "wert": "Keller unbeheizt und ungedämmt"
+            },
+            {
+                "quelle": "objekt/keller",
+                "enthaelt": "beheizt",
+                "wert": "Keller beheizt und ungedämmt"
+            }
+        ],
+        "objekt/bauweise": [
+            {
+                "quelle": "objekt/einbauzustand",
+                "ist": "EZ_FREISTEHEND",
+                "wert": "freistehend"
+            },
+            {
+                "quelle": "objekt/einbauzustand",
+                "enthaelt": "eck",
+                "wert": "Eckhaus"
+            },
+            {
+                "quelle": "objekt/einbauzustand",
+                "enthaelt": "zwei",
+                "wert": "2-seitig angebaut"
+            },
+            {
+                "quelle": "objekt/einbauzustand",
+                "enthaelt": "ein",
+                "wert": "1-seitig angebaut"
+            }
+        ]
+    },
+    "_offen_fuer_den_berater": {
+        "techDoku/beschr_wand": "Bauart (massiv / zweischalig / Holz / Fachwerk) steht nicht im Energiemodell. Der Daemmzustand schon: U-Wert der Aussenwand im Ist.",
+        "techDoku/beschr_fenster": "Rahmenmaterial steht nicht im Modell. Die Scheibenzahl folgt aus dem U-Wert: ueber 3 = 1-fach, 1,1 bis 2,8 = 2-fach, unter 1,1 = 3-fach.",
+        "techDoku/beschr_dach": "Dachform steht nicht im Modell, und ob eine oberste Geschossdecke als gedaemmt gilt, ist eine Ermessensfrage.",
+        "techDoku/beschr_kellerabgang": "Nur vor Ort feststellbar.",
+        "objekt/lage": "Nur vor Ort feststellbar.",
+        "objekt/zustand2": "Bewertung des Beraters.",
+        "nutzereinfluss/anwesenheit": "Aus dem Gespraech.",
+        "nutzereinfluss/raumnutzung": "Aus dem Gespraech.",
+        "nutzereinfluss/lueftverhalten": "Aus dem Gespraech."
+    }
+}

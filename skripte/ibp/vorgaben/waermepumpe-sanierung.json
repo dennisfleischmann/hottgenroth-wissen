@@ -1,0 +1,42 @@
+{
+  "_": "Vorgabesatz Waermepumpensanierung - anzuwenden, wenn zum Projekt keine",
+  "__": "weiteren Angaben vorliegen. Jeder Wert ist entweder fachlich gesetzt",
+  "___": "oder an 84 realen Projekten der LocalDB erhoben; die Herkunft steht in",
+  "____": "DIN18599-ANLAGENTECHNIK.md, Abschnitt 'Vorgabesatz Waermepumpe'.",
+
+  "heizung": {
+    "auslegung": { "vorlauf": 55, "ruecklauf": 45 },
+
+    "erzeuger": [ { "bauart": "HeatPump", "wp_typ": 0, "baujahr": 2026,
+                    "brennstoff": "Brennstoff_StromMix",
+                    "vorlauf": 55, "ruecklauf": 45 } ],
+
+    "speicher": [ { "baujahr": 2026, "zirkulation": false, "gleicher_raum": true } ],
+
+    "uebergabe": [ { "bauart": "WaterRadiator", "regelung": 5,
+                     "raumhoehe": 3, "anteil": 1 } ],
+
+    "verteilung": {
+      "netz": 1,
+      "netz_heizung": 0,
+      "gruppe": 0,
+      "gamma": 0.35,
+      "heizkoerper": 1,
+      "abgleich": 2,
+      "abgleich_pumpe": true,
+      "pumpen": 1,
+      "pumpe_regelung": 2,
+      "pumpe_auslegung": 1,
+      "leitungen": [ { "art": 2, "lage": 1, "daemmung": 7 },
+                     { "art": 1, "lage": 1, "daemmung": 7 },
+                     { "art": 0, "lage": 1, "daemmung": 7 } ]
+    }
+  },
+
+  "warmwasser": {
+    "erzeuger": [ { "bauart": "HeatPump", "wp_typ": 0, "baujahr": 2026,
+                    "brennstoff": "Brennstoff_StromMix" } ],
+    "speicher": [ { "baujahr": 2026, "zirkulation": false } ],
+    "verteilung": { "netz": 0, "zirkulation": 1, "gruppe": 0, "zentral": 0 }
+  }
+}

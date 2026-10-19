@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<geometry>
+  <Roof count="1">
+    <roof name="Dach 003" GUID="931e7459-db90-48e4-bbf5-6b01d0d1d632" floor="535066ef-7465-4501-8ec5-b7e5a3872aa2" u_value="1.3" u_valueDimGuid="0e2a5289-dc01-4e80-8609-ba27b101769e" u_valueDimName="Massive Konstruktion" u_value_default_typo="True" type="Polygonal" thickness="0.25" partitial="False" gable_mode="OrthogonalToPlane" gable_mode2="OrthogonalToPlane">
+      <points count="4">         <p>3.36089703344533;6.09194642097719;5.8</p>
+        <p>3.36089703344533;16.091946420977191;5.8</p>
+        <p>7.36089703344533;16.091946420977191;8.7999999999999989</p>
+        <p>7.36089703344533;9.09194642097719;8.7999999999999989</p>       </points>
+      <repositories count="1">
+        <val>
+3f8b8b4f-6ad1-497f-b2a4-4ed74935c675
+</val>
+      </repositories>
+      <intersections count="0" />
+      <plane_definition type="Height1AndSlope" visible="True">
+        <values count="2">
+          <val>
+0
+</val>
+          <val>
+0.64350110879328437
+</val>
+        </values>
+        <points count="4">
+          <p>3.36089703344533;6.09194642097719;0</p>
+          <p>3.36089703344533;16.091946420977191;0</p>
+          <p>5.36089703344533;16.091946420977191;0</p>
+          <p>5.36089703344533;6.09194642097719;0</p>
+        </points>
+      </plane_definition>
+    </roof>
+  </Roof>
+</geometry>

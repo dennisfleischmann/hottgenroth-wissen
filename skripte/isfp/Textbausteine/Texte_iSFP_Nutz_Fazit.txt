@@ -1,0 +1,3 @@
+﻿Eigene Texte zum iSFP
+
+Wie viel Energie ein Gebäude am Ende tatsächlich verbraucht, hängt maßgeblich von den Menschen ab, die darin leben – zwei identische Häuser können je nach Nutzerverhalten einen völlig unterschiedlichen Verbrauch aufweisen. Genau deshalb klaffen berechneter Energiebedarf und real gemessener Energieverbrauch häufig auseinander.

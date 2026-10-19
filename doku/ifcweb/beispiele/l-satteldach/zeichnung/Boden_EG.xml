@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<geometry>
+  <Platform count="1">
+    <platform name="Boden EG" GUID="603e8e25-f251-4951-9593-ec805269cfd9" floor="67710ebf-3db1-4f16-9a30-338e62b3db5c" u_value="1.2" u_valueDimGuid="cde2d23d-93a0-4c04-842a-20b30c126bae" u_valueDimName="Boden gegen Erdreich, Stahlbeton massiv" u_value_default_typo="True" thickness="0.2" offset_bottom="True" against_soil="True" against_air="False" against_unheated="False" building_hull_added="True" is_hole="False" is_platform="True" is_auto_generated="True" border="CellarWall">
+      <points count="6">
+        <p>3.36089703344533;16.0919464209772;0</p>
+        <p>3.36089703344533;6.09194642097719;0</p>
+        <p>17.3608970334453;6.09194642097719;0</p>
+        <p>17.3608970334453;12.0919464209772;0</p>
+        <p>11.3608970334453;12.0919464209772;0</p>
+        <p>11.3608970334453;16.0919464209772;0</p>
+      </points>
+      <repositories count="1">
+        <val>e6e6a840-024e-4e83-8a49-f34c559bbf5e</val>
+      </repositories>
+    </platform>
+  </Platform>
+</geometry>

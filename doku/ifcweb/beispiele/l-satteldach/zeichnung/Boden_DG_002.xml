@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<geometry>
+  <Platform count="1">
+    <platform name="Boden DG 002" GUID="d1c5303c-e630-4096-8649-37d85d1d3455" floor="e3fb7fcc-bd8a-4a79-8348-c79a53a0c1e3" u_value="0.6" u_valueDimGuid="840c34b0-c14a-4927-b4a3-1a9c3698e631" u_valueDimName="Massive Decke" u_value_default_typo="True" thickness="0.2" offset_bottom="False" against_soil="False" against_air="False" against_unheated="False" building_hull_added="False" is_hole="False" is_platform="False" is_auto_generated="True" border="OuterWall">
+      <points count="6">
+        <p>3.36089703344533;16.0919464209772;5.6</p>
+        <p>3.36089703344533;6.09194642097719;5.6</p>
+        <p>17.3608970334453;6.09194642097719;5.6</p>
+        <p>17.3608970334453;12.0919464209772;5.6</p>
+        <p>11.3608970334453;12.0919464209772;5.6</p>
+        <p>11.3608970334453;16.0919464209772;5.6</p>
+      </points>
+      <repositories count="1">
+        <val>5b31663e-6710-4383-854a-7029305ed187</val>
+      </repositories>
+    </platform>
+  </Platform>
+</geometry>

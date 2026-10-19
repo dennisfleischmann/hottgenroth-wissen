@@ -1,0 +1,367 @@
+﻿=== Zones === 1 Stueck
+  [0] P0Zone  'Wohnen'  P0Zone_1[4DDF1C4B]
+      enCalculateC_wirk             Simplified_Middleweight
+      enConditioningByStaticSystems Only_Heated
+      enModeThermalBridge           Delta_U_wb_010
+      enOperationModeHeatingNonOperatingTimesSwitchOff
+      enTypeUnconditionedZone       Unconditioned
+      enumCalculateC_wirk           2
+      enumConditioningByStaticSystems1
+      enumModeThermalBridge         1
+      enumOperationModeHeatingNonOperatingTimes2
+      enumOperationModeHeatingOperatingTimes2
+      fdelta_U_wb_calculated        0,15
+      sTypeIDClass                  2000
+      umOperationModeHeatingOperatingTimesSwitchOff
+      -> BoundaryCondition          P10BoundaryCondition  733dc95e-cef9-44eb-aadc-5cf79ac77f92
+      -> Building                   DIN18599Building  2
+      -> ConstructionElements       (38)
+      -> ZoneVentilation            P0ZoneVentilation  3bf3d879-0cfb-44b8-b6e7-53ad7935bfbe
+
+=== EnergySources === 26 Stueck
+  [0] P1EnergySource  'Strom-Mix'  id_Electrical
+      bIsStandardEnergySource       True
+      enCategory                    Electrical
+      enTypeOfEnergySource          In
+      enumCategory                  3
+      fCO2                          550
+      ff_HS_HI                      1
+      ff_p                          1,8
+      ff_p_notRenewable             1,8
+      ff_p_total                    2,8
+  [1] P1EnergySource  'Flüssiggas'  id_LiquidGas
+      bIsStandardEnergySource       True
+      enCategory                    Gas
+      enTypeOfEnergySource          In
+      enumCategory                  5
+      fCO2                          270
+      ff_HS_HI                      1,09
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [2] P1EnergySource  'Umweltenergie Wärme'  id_Environmental
+      bIsStandardEnergySource       True
+      enCategory                    Environmental
+      enTypeOfEnergySource          Produced
+      enumCategory                  4
+      fa_bio                        1
+      ff_HS_HI                      1
+      ff_p_total                    1
+  [3] P1EnergySource  'Erzeugter Strom innerhalb Bilanzgrenzen'  id_RenewableElectricalProduced
+      enCategory                    Environmental
+      enTypeOfEnergySource          Produced
+      enumCategory                  4
+      ff_HS_HI                      1
+      ff_p_total                    1
+  [4] P1EnergySource  'Eingespeist: PV oder Wind'  id_FeedIn_PVorWind
+      enCategory                    Electrical
+      enTypeOfEnergySource          Exported
+      enumCategory                  3
+      fCO2                          550
+      ff_HS_HI                      1
+      ff_p                          2,8
+      ff_p_notRenewable             2,8
+      ff_p_total                    2,8
+  [5] P1EnergySource  'Eingespeist: KWK'  id_FeedIn_MicroCHP
+      enCategory                    Electrical
+      enTypeOfEnergySource          Exported
+      enumCategory                  3
+      fCO2                          860
+      ff_HS_HI                      1
+      ff_p                          2,8
+      ff_p_notRenewable             2,8
+      ff_p_total                    2,8
+  [6] P1EnergySource  'Heizöl EL'  Brennstoff_Heizoel
+      enCategory                    Oil
+      enTypeOfEnergySource          In
+      enumCategory                  6
+      fCO2                          310
+      ff_HS_HI                      1,06
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [7] P1EnergySource  'Erdgas E'  Brennstoff_ErdgasH
+      enCategory                    Gas
+      enTypeOfEnergySource          In
+      enumCategory                  5
+      fCO2                          240
+      ff_HS_HI                      1,11
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [8] P1EnergySource  'Erdgas LL'  Brennstoff_ErdgasL
+      enCategory                    Gas
+      enTypeOfEnergySource          In
+      enumCategory                  5
+      fCO2                          240
+      ff_HS_HI                      1,11
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [9] P1EnergySource  'Stadtgas'  Brennstoff_Stadtgas
+      enCategory                    Gas
+      enTypeOfEnergySource          In
+      enumCategory                  5
+      fCO2                          240
+      ff_HS_HI                      1
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [10] P1EnergySource  'Flüssiggas'  Brennstoff_Fluessiggas
+      enCategory                    Gas
+      enTypeOfEnergySource          In
+      enumCategory                  5
+      fCO2                          270
+      ff_HS_HI                      1,09
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [11] P1EnergySource  'Steinkohle'  Brennstoff_Steinkohle
+      enCategory                    Fuel
+      enTypeOfEnergySource          In
+      fCO2                          400
+      ff_HS_HI                      1,04
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [12] P1EnergySource  'Koks'  Brennstoff_Koks
+      enCategory                    Fuel
+      enTypeOfEnergySource          In
+      fCO2                          400
+      ff_HS_HI                      1
+      ff_p                          1,1
+      ff_p_notRenewable             1,1
+      ff_p_total                    1,1
+  [13] P1EnergySource  'Braunkohle'  Brennstoff_Braunkohle
+      enCategory                    Fuel
+      enTypeOfEnergySource          In
+      fCO2                          430
+      ff_HS_HI                      1,07
+      ff_p                          1,2
+      ff_p_notRenewable             1,2
+      ff_p_total                    1,2
+  [14] P1EnergySource  'Stückholz'  Brennstoff_Stueckholz
+      enCategory                    Biomass
+      enTypeOfEnergySource          In
+      enumCategory                  10
+      fCO2                          20
+      ff_HS_HI                      1,08
+      ff_p                          0,2
+      ff_p_notRenewable             0,2
+      ff_p_total                    1,2
+  [15] P1EnergySource  'Holzhackschnitzel'  Brennstoff_HolzhackSchnitzel
+      enCategory                    Biomass
+      enTypeOfEnergySource          In
+      enumCategory                  10
+      fCO2                          20
+      ff_HS_HI                      1,08
+      ff_p                          0,2
+      ff_p_notRenewable             0,2
+      ff_p_total                    1,2
+  [16] P1EnergySource  'Holzpellets'  Brennstoff_Holzpellets
+      enCategory                    Biomass
+      enTypeOfEnergySource          In
+      enumCategory                  10
+      fCO2                          20
+      ff_HS_HI                      1,08
+      ff_p                          0,2
+      ff_p_notRenewable             0,2
+      ff_p_total                    1,2
+  [17] P1EnergySource  'Strom-Mix'  Brennstoff_StromMix
+      enCategory                    Electrical
+      enTypeOfEnergySource          In
+      enumCategory                  3
+      fCO2                          560
+      ff_HS_HI                      1
+      ff_p                          1,8
+      ff_p_notRenewable             1,8
+      ff_p_total                    3
+  [18] P1EnergySource  'Strom (Sondertarif)'  Brennstoff_StromSonder
+      enCategory                    Electrical
+      enTypeOfEnergySource          In
+      enumCategory                  3
+      fCO2                          560
+      ff_HS_HI                      1
+      ff_p                          1,8
+      ff_p_notRenewable             1,8
+      ff_p_total                    3
+  [19] P1EnergySource  'Strom (Nachtstrom)'  Brennstoff_StromNacht
+      enCategory                    Electrical
+      enTypeOfEnergySource          In
+      enumCategory                  3
+      fCO2                          560
+      ff_HS_HI                      1
+      ff_p                          1,8
+      ff_p_notRenewable             1,8
+      ff_p_total                    3
+  [20] P1EnergySource  'Kraft-Wärme-Kopplung, fossil'  Brennstoff_KWKfossil
+      enCategory                    DistrictHeating_Cogeneration
+      enTypeOfEnergySource          In
+      enumCategory                  1
+      fCO2                          180
+      ff_HS_HI                      1
+      ff_p                          0,7
+      ff_p_notRenewable             0,7
+      ff_p_total                    0,7
+  [21] P1EnergySource  'Kraft-Wärme-Kopplung, regenerativ'  Brennstoff_KWKregenerativ
+      enCategory                    DistrictHeating_Cogeneration
+      enTypeOfEnergySource          In
+      enumCategory                  1
+      fCO2                          40
+      ff_HS_HI                      1
+      ff_p_total                    0,7
+  [22] P1EnergySource  'Heizwerk, fossil'  Brennstoff_HKWfossil
+      enCategory                    DistrictHeating_HeatPlant
+      enTypeOfEnergySource          In
+      enumCategory                  2
+      fCO2                          400
+      ff_HS_HI                      1
+      ff_p                          1,3
+      ff_p_notRenewable             1,3
+      ff_p_total                    1,3
+  [23] P1EnergySource  'Heizwerk, regenerativ'  Brennstoff_HKWregenerativ
+      enCategory                    DistrictHeating_HeatPlant
+      enTypeOfEnergySource          In
+      enumCategory                  2
+      fCO2                          60
+      ff_HS_HI                      1
+      ff_p                          0,1
+      ff_p_notRenewable             0,1
+      ff_p_total                    1,3
+  [24] P1EnergySource  'Sonnen-Energie'  Brennstoff_Sonne
+      enCategory                    Environmental
+      enTypeOfEnergySource          In
+      enumCategory                  4
+      ff_HS_HI                      1
+  [25] P1EnergySource  'Heizungswasser'  Brennstoff_Wasser
+      enCategory                    Fuel
+      enTypeOfEnergySource          In
+      ff_HS_HI                      1
+      ff_p                          1
+      ff_p_notRenewable             1
+      ff_p_total                    1
+
+=== UnitHeating === 1 Stueck
+  [0] P5HeatGenerationUnit  'Heizwärme-Erzeugung 1'  P5HeatGenerationUnit_1[AB23B28C]
+      bAdoptGeometry                True
+      enUnitType                    Heating
+      -> alReferenceList            (1)
+      [0] String  ''  
+          FirstChar                     P
+          Length                        30
+      -> Building                   DIN18599Building  2
+      -> Generators                 (1)
+      [0] P58HeatGeneratorBoilerComponent  'Erzeuger 1'  P58HeatGeneratorBoilerComponent_1[A908024F]
+          bAtmosphericGasBoiler         True
+          bbeta_k_pl_Standard           True
+          bBiomassBoilerAutomaticNoBufferStorageTrue
+          beta_k_Pint_Standard          True
+          beta_k_Pn_Standard            True
+          bGeneratorIsNew               True
+          bGeneratorIsNewDeterminedByAgeTrue
+          bP_aux_P0_Standard            True
+          bP_aux_pint_Standard          True
+          bP_aux_Pn_Standard            True
+          bq_B70_Standard               True
+          bQdot_N_Standard              True
+          enGenerationType              Boiler
+          enUnitType                    Heating
+          fbeta_k_pl                    0,3
+          feta_k_Pint                   0,907552
+          feta_k_Pn                     0,902552
+          ff_d_PM                       1
+          ff_g_PM                       1
+          ff_HsHi                       1,11
+          fFaktor_G                     0,0004
+          fFaktor_H                     0,0004
+          fP_aux_Pint                   0,05467099
+          fP_aux_Pn                     0,164013
+          fq_B70                        0,01446552
+          fQdot_N                       14,79574
+          ftheta_g_test_100             70
+          ftheta_g_test_pl              40
+          ftheta_RA                     55
+          ftheta_VA                     70
+          strEnergySource               Brennstoff_ErdgasH
+          strGeneratorID                P58HeatGeneratorBoiler_1[3035CA0D]
+          -> Building                   DIN18599Building  2
+          -> Generator                  P58HeatGeneratorBoiler  P58HeatGeneratorBoiler_1[3035CA0D]
+
+=== CircuitHeatWater === 1 Stueck
+  [0] P5HeatWaterCircuit  'Verteilung 1'  P5HeatWaterCircuit_1[59C04622]
+      bAdoptGeometry                True
+      enCircuitType                 HeatWater
+      enumCircuitType               2
+      -> alReferenceList            (1)
+      [0] String  ''  
+          FirstChar                     P
+          Length                        32
+      -> Building                   DIN18599Building  2
+      -> Distributions              (1)
+      [0] P5HeatDistribution  'Verteilung 1'  P5HeatDistribution_1[26D3BCC6]
+          bGamma_Standard               True
+          enBuildingGroup               Group1
+          enBuildingGroup_design        Undefined
+          enNetworkType                 DoublePipeNetwork
+          enTypeOfDistribution          Heating
+          enumNetworkType               1
+          fGamma                        0,35
+          sNumberOfRadiators            1
+          -> Building                   DIN18599Building  2
+          -> Pipes                      (3)
+          -> Pumps                      (1)
+      -> Emissions                  (1)
+      [0] P5HeatEmissionComponent  'Übergabe 1'  P5HeatEmissionComponent_1[1CC0192F]
+          enCircuitType                 HeatWater
+          enumCircuitType               2
+          fContribution                 1
+          fTemperatureRise              42,5
+          strEmissionID                 P5HeatEmissionWaterRadiator_1[4B41C60C]
+          strIDLink                     P0Zone_1[4DDF1C4B]
+          strParentID                   P5HeatWaterCircuit_1[59C04622]
+          -> Building                   DIN18599Building  2
+          -> Emission                   P5HeatEmissionWaterRadiator  P5HeatEmissionWaterRadiator_1[4B41C60C]
+
+=== P58Generators === 1 Stueck
+  [0] P58HeatGeneratorBoiler  'Erzeugertyp 1'  P58HeatGeneratorBoiler_1[3035CA0D]
+      enGenerationType              Boiler
+      enumBoilerType                3
+      enumBoilerTypeAdditional      1
+      iReferenceCount               1
+      sGeneratorAge                 2006
+
+=== P58Emissions === 1 Stueck
+  [0] P5HeatEmissionWaterRadiator  'Übergabetyp 1'  P5HeatEmissionWaterRadiator_1[4B41C60C]
+      bP_C_Standard                 True
+      bP_P_Standard                 True
+      bP_V_Standard                 True
+      enCircuitType                 HeatWater
+      enEmissionType                Radiator
+      enumCircuitType               2
+      enumControlType               3
+      enumPositionCircuit           1
+      fP_C                          0,1
+      fP_V                          10
+      fRoomHeight                   3
+      iReferenceCount               1
+
+=== P58CircuitPipes === 3 Stueck
+  [0] P58CircuitPipe  'Leitungstyp 1'  P58CircuitPipe_1[57815BCB]
+      enumPipeInsulation            2
+      iReferenceCount               1
+  [1] P58CircuitPipe  'Leitungstyp 2'  P58CircuitPipe_2[E975C7CE]
+      enumPipeInsulation            2
+      iReferenceCount               1
+  [2] P58CircuitPipe  'Leitungstyp 3'  P58CircuitPipe_3[6BD0A661]
+      enumPipeInsulation            2
+      iReferenceCount               1
+
+=== P58CircuitPumps === 1 Stueck
+  [0] P58CircuitPump  'Pumpentyp 1'  P58CircuitPump_1[7E5BAA65]
+      bdeltatheta_z_Standard        True
+      bP_Pump_Standard              True
+      fb                            2
+      iReferenceCount               1
+
+=== P58Storages === 0 Stueck
+

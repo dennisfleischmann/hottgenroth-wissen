@@ -1,0 +1,57 @@
+{
+  "beschreibung": "V4DZX_Nadine Klenke -- Baustoffgruppe, Schichtart und Katalogpfad fuer die 59 Schichten, die am 30.09./01.10.2026 ohne diese Felder eingespielt wurden. Zehn verschiedene Baustoffe auf elf Schichtplaetzen in drei Bauteilen (Aussenwand iso-span, oberste Geschossdecke, Kellerdecke), je Variante wiederholt; der Holzspanbeton-Mantel liegt zweimal in derselben Wand.",
+  "quellen": {
+    "gruppen": "hottgenroth-baustoffkatalog.csv (3.534 Baustoffe, Spalte GruppeNr) -- der Katalog der Software selbst, nicht aus dem Namen geraten",
+    "pfade": "hottgenroth-materialbaum.csv (570 Knoten)",
+    "lambda_und_dicke": "unveraendert -- der U-Wert bleibt, wie er ist"
+  },
+  "zum_katalogpfad": "Nur gesetzt, wo die Schicht einem Knoten des Baums wirklich entspricht. Mischschichten (anteilig gerechnetes lambda), ein ausgewiesenes Ersatz-lambda und Baustoffe ohne Knoten bekommen keinen Pfad: ein erfundener Pfad stellt die Schicht im Materialbaum an eine falsche Stelle und sieht dort genauso plausibel aus wie ein richtiger.",
+  "schichten": {
+    "Kalk-Gipsputz (Innenputz)": {
+      "gruppe": "putz_estrich",
+      "katalogpfad": "1.1.2",
+      "warum": "Knoten 1.1.2 'Putzmoertel aus Kalkgips, Gips, Anhydrit und Kalkanhydrit'. lambda 0,70 trifft den Satz, der auch in einer von der Software selbst angelegten Wand gemessen wurde (BauteilWriter: lambda 0,7, Gruppe 1, Pfad 1.1.2)."
+    },
+    "Kalk-Zementputz (Außenputz)": {
+      "gruppe": "putz_estrich",
+      "katalogpfad": "1.1.1",
+      "warum": "Knoten 1.1.1 'Putzmoertel aus Kalk, Kalkzement und hydraulischem Kalk' -- der Name der Schicht trifft den Knoten, lambda 0,87 ist der uebliche Ansatz fuer Kalkzementputz."
+    },
+    "Holzspanbeton-Mantel (iso-span)": {
+      "gruppe": "platte",
+      "warum": "Der Baustoffkatalog fuehrt Holzspanbeton unter 'Bauplatten' (Gruppe 3), nicht unter Holz: 'Holzspanbeton (550 kg/m3)' lambda 0,13 liegt neben den 0,128 der Schicht. Im Materialbaum hat Holzspanbeton keinen Knoten, deshalb kein Pfad."
+    },
+    "Kern: Füllbeton Bn 150 (84 %) mit Holzspanbeton-Stegen (16 %), Mischschicht": {
+      "gruppe": "beton",
+      "warum": "Mischschicht: lambda 1,73 ist aus 84 % Fuellbeton und 16 % Stegen gerechnet und entspricht keinem Katalogsatz. Gruppe nach dem ueberwiegenden Anteil, kein Pfad. Saubere Loesung waere ein inhomogenes Bauteil (TcBuildingElementDimensionLayerSection, EN ISO 6946) -- das ist mehr als ein Feldwechsel."
+    },
+    "Gipskarton": {
+      "gruppe": "platte",
+      "katalogpfad": "3.5.1",
+      "warum": "Knoten 3.5.1 'Gipskartonplatten (DIN 18180)'; der Katalogsatz 'Gipskartonplatte (700 kg/m3)' hat lambda 0,2100 -- genau die 0,21 der Schicht."
+    },
+    "Holzschalung": {
+      "gruppe": "holz",
+      "warum": "Gruppe 6 setzt zugleich MaterialType 12 (mmdWood), den die Software jeder Holzschicht gibt. Kein Pfad: 6.1.1 'Konstruktionsholz (500 kg/m3)' rechnet mit lambda 0,13, die Schicht traegt 0,14."
+    },
+    "Mischschicht: Mineralfaser (95 %) zwischen Nagelbrettbinder-Untergurten (5 %)": {
+      "gruppe": "daemmung",
+      "schichtart": "daemmschicht",
+      "warum": "lambda 0,046 ist aus 95 % Mineralfaser und 5 % Holz gerechnet, also kein Katalogsatz -- kein Pfad. Die Schichtart macht aus der Schicht eine Daemmschicht (LayerType 3, MaterialType 1); bisher stand sie wie eine normale Schicht da."
+    },
+    "Zementestrich": {
+      "gruppe": "putz_estrich",
+      "katalogpfad": "1.4.1",
+      "warum": "Knoten 1.4.1 'Zement-Estrich'; Estriche stehen im Katalog in Gruppe 1, nicht in Gruppe 2. lambda 1,40 trifft die Katalogsaetze (1,40 bis 1,60)."
+    },
+    "Trittschalldämmung, Polystyrol oder Mineralfaser": {
+      "gruppe": "daemmung",
+      "schichtart": "daemmschicht",
+      "warum": "Der Name laesst den Baustoff offen ('oder'), deshalb kein Pfad -- 5.5.1.x (Polystyrol) und 5.6.x (Faserdaemmstoff) sind verschiedene Aeste. Die Gruppe und die Schichtart stehen trotzdem fest."
+    },
+    "Stahlbeton-Fertigteildecke mit Putz (Ersatz-Lambda aus Gesamtwiderstand)": {
+      "gruppe": "beton",
+      "warum": "Kein Pfad: der Name weist lambda 0,93 selbst als Ersatzwert aus -- Stahlbeton liegt im Katalog bei 2,3 bis 2,5. Der Wert bleibt unberuehrt, aber er entspricht keinem Knoten."
+    }
+  }
+}

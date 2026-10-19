@@ -1,0 +1,18 @@
+# Byte-treue Dateien: nie Zeilenenden umschreiben, sonst stimmt keine Prüfsumme mehr
+*.BDExit  -text
+*.bin     -text
+*.sqproj  -text
+*.zip     -text
+*.exe     -text
+*.dll     -text
+*.jpg     -text
+*.png     -text
+
+# Textdateien: LF im Repo, PowerShell darf CRLF behalten
+*.md      text eol=lf
+*.json    text eol=lf
+*.ps1     text eol=crlf
+*.cmd     text eol=crlf
+*.sql     text
+*.cs      text
+*.php     text
