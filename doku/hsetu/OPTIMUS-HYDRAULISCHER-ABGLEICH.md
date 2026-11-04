@@ -160,6 +160,11 @@ sind das Problem:
    1 840 W, Wohnraum 4 732 W) sind die des **Bestands**; die Variante hätte 1 296 / 4 250 W
    und rechnet mit 1 464 l/h / 658 mbar (EG) statt 2 275 l/h / 1 730 mbar. Der Bericht
    „End Zustand" ist also mit dem falschen Projekt erzeugt worden — oder falsch beschriftet.
+   **Die Variante ist aber selbst nicht aktuell:** Räume zuletzt 22.07.2026 bearbeitet,
+   Optimus-Lauf vom 20.09.2026, drei Kreise ohne Normleistung, Zuleitungen 15/20 m × 16 mm
+   statt 19/26 m × 15 mm. Die Nachrechnung trifft ihre DB-Werte deshalb nicht (983/774 gegen
+   658/179 mbar) — ihre Zahlen taugen nicht als „Ergebnis saniert", sie muss neu gerechnet
+   werden.
 2. **Heizlast 98 W/m² Gesamtgebäude, Küche 222 W/m²** (1 841 W auf 8,3 m²). Eine
    Fußbodenheizung liefert bei 35/30 °C und R_B = 0 höchstens ~50 W/m²; der Kern reagiert
    folgerichtig mit ΔT = 5 K (Minimum), 6 l/min durch 60 m 14-mm-Rohr, „kein passender
@@ -225,7 +230,7 @@ GeneratorType, Stamp*, Sync*, GId, MId, VariantRoot` sind Verwaltungsrauschen.
 | `PmDistributor` | Verteiler-Erweiterung zum Device (`UUID = PmDevice.UUID`): `BranchCount`, `NumberOfCircuits`, `ManifoldDistributorUUID/ManifoldCollectorUUID` (virtuelle IDs, keine Zeilen) | |
 | `PmBranch` | **Abgänge des Verteilers**, Ventil denormalisiert: `ValveLongDesc` („Abgang Verteiler"), `ValveKvsValue` (2,4), `ValveKvValue`, `ValveKvSettingAlphanumeric` (Voreinstellung), `ValveDeltaP`; `ParentUUID` = Manifold-ID, `ElementUUID` = Verteiler-Device, `ConElement01RefClass TModelSingleCircuit`. Steht nach dem Speichern — spiegelt den **letzten gespeicherten** Lauf, nicht zwingend den gedruckten Bericht (Hilgert: Werte ≠ beide Berichte) | |
 | `PmConnection` | Anschlüsse (`HK VL`, `HV`, …) der Geräte | `ElementUUID → PmDevice` |
-| `PmSpace` | Raum im Anlagenmodell (eigene UUID ≠ `BmRoom.UUID`), Heizlastanteile (`FloorHeatingRatedPartOfHeatingLoad`, …) | |
+| `PmSpace` | Raum im Anlagenmodell (eigene UUID ≠ `BmRoom.UUID`). Die Heizlastspalten (`HeatingLoad`, `FloorHeatingRatedHeatingLoad`, …) waren in beiden Hilgert-Projekten **leer** — der Kern holt die Last zur Laufzeit aus `BmRoom` (`PlantSpace.Heating.RatedHeatingLoad`) | `PmBuildingReference` Typ 22 → `BmRoom` |
 | `PmSpaceReference` | `ReferenceToUUID → PmCircuit` (Raum → Kreis) | |
 | `PmBuildingReference` | **Brücke PIM ↔ BIM**: `ObjReferenceType 22` = `PmSpace → BmRoom` (ReferenceSpaceUUID = `BmFloor`), **13 = `PmCircuit → BmRoom`**, 32 = `PmDistribution → BmZone`, 7 = Anlage → Gebäude | |
 | `PmValve`, `PmRadiator`, `PmPipeline`, `PmPump` | nur bei Heizkörpernetzen/Rohrnetz; bei reiner FBH **leer** | |
