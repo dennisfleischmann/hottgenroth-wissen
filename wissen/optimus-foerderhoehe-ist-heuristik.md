@@ -1,31 +1,34 @@
 ---
 name: optimus-foerderhoehe-ist-heuristik
-description: "Die Optimus-Förderhöhe bei Fußbodenheizung ist keine Rohrnetzrechnung — Zuleitung als (V̇/(4,3·A))²·L geschätzt, explodiert bei erzwungener 5-K-Spreizung; 1 730 mbar im Hilgert-Bericht sind so entstanden"
+description: "Die Optimus-Förderhöhe einer FBH-Verteilung = Verteilerzuleitung als Rohr (d_i aus dem Vorlaufanschluss, Standard 20 mm, Länge DistanceToPump) + ungünstigster Kreis, mindestens eine Netz-Heuristik; Hilgert 1 730 mbar = 15-mm-Zuleitung × vierfacher Durchfluss"
 metadata:
   type: reference
 ---
 
-**Gelesen** in `TCalcOptimusCircuitDistributionDpPumpCalcObject.CalcDpPump`
-(`Hsetu.FW.Calculations~5e976678.cs`, Z. 26500 ff.), **gemessen** am Hilgert-Bericht.
+**Gelesen** in `TCalcOptimusCircuitDistributionDpPumpCalcObject.CalcDpPump` /
+`CalcMaxPressureLoss` und `TCalcOptimusDistributorCalcObject.CalcDpPipe`
+(`Hsetu.FW.Calculations~5e976678.cs`), **gemessen** an beiden Hilgert-Berichten
+(Nachrechnung 1 818/611 gegen 1 730/571 mbar bei 35 °C, 1 202/149 gegen 1 070/152 bei 45 °C;
+Rest = quadrierter Durchfluss-Überhang von 3–5 %).
 
-Die Förderhöhe einer FBH-Verteilung setzt sich zusammen aus
-`Δp_sonstigeGeräte + Δp_Zähler + max(Δp_Zuleitung, Verteilerniveau)`. Das Verteilerniveau
-(ungünstigster Kreis: Rohrreibung + offenes Ventil) ist echte Physik und stimmt (Hilgert EG
-≈ 270 mbar). Die **Zuleitung** dagegen ist eine Heuristik:
+    Förderhöhe = Δp_sonstigeGeräte + Δp_Zähler + max( Netz-Heuristik , Δp_Zuleitung + Δp_Rohr,worst + Δp_Ventil,offen )
 
-    R [mbar/m] = max(0,2 ; (V̇_ges [l/h] / (4,3 · A_beheizt [m²]))²),  Δp = R · L_Zuleitung
+- **Δp_Zuleitung** ist ein echtes Rohr: Colebrook über `PmDevice.DistanceToPump` (einfache
+  Länge) mit `d_i = PmConnection.InnerDiameter` des Verteiler-**Vorlaufanschlusses**
+  (`PmDistributor.SupplyConnectorUUID`); ist er leer, nimmt der Kern **20 mm**. Durchfluss =
+  Summe aller Kreise. Für die Ventilwahl wird dieser Anteil wieder abgezogen — die
+  Voreinstellungen hängen also nicht davon ab, nur die ausgewiesene Förderhöhe.
+- **Netz-Heuristik** `R = max(0,2; (V̇[l/h]/(4,3·A_Raum[m²]))²)` mbar/m × Zuleitungslänge —
+  auf ~20 K Spreizung geeicht, bei erzwungenen 5 K 16-fach; sie greift nur, wenn sie über
+  dem Rohrpfad liegt (bei Hilgert erst ab ~25 mm Zuleitung).
 
-mit `A_beheizt` = Summe der *Raumflächen* der versorgten Räume und `L_Zuleitung` =
-`PmDevice.DistanceToPump` des Verteilers. Sie ist auf ~20 K Spreizung geeicht. Zwingt man den
-Vorlauf auf 35 °C bei Bestandsheizlast, klemmt der Kern die Spreizung auf 5 K → vierfacher
-Volumenstrom → **16-facher** spezifischer Druckverlust (Hilgert EG: 30,7 mbar/m × 19 m = 583
-mbar). Dazu kommt ein weiterer, mit V̇² wachsender Anlagenanteil (EG ≈ 1 150, OG ≈ 210 mbar;
-verhält sich wie ein Gerät mit kvs ≈ 2,1, vermutlich der Anlagenpfad, weil „Pumpe nicht
-vorhanden" = Anlagenpumpe). **Zerlegung offen** — braucht einen Lauf mit
-`calculation.WriteLog = true`.
+Hilgert: beide Verteiler tragen `InnerDiameter 0,015`, 19 bzw. 26 m. 2 275 l/h (ΔT auf 5 K
+geklemmt, weil 35 °C fest bei Bestandsheizlast) durch 15 mm = 3,7 m/s ≈ 1 500 mbar. Mit 20 mm
+wären es 666, mit 25 mm 583 mbar (dann Heuristik). Kein Rechenfehler — zwei Eingaben.
 
-**How to apply:** Eine FBH-Förderhöhe über ~400 mbar im Optimus-Bericht ist ein Symptom der
-Eingaben (zu niedriger fester Vorlauf, zu hohe Heizlast, keine Pumpe eingetragen), kein
-Pumpenauslegungswert. Erst `RatedFlowTemperature` freigeben und Heizlast prüfen, dann drucken.
+**How to apply:** Förderhöhe > 400 mbar bei FBH → zuerst Vorlaufanschluss-Durchmesser und
+`DistanceToPump` des Verteilers prüfen, dann ob ΔT überall 5,0 K ist (Vorlauf zu niedrig
+erzwungen). `skripte/optimus/optimus-nachrechnen.py --di 20` zeigt den Unterschied; ob die
+15 mm eingegeben oder aus einer Vorlage stammen, steht nicht in der DB.
 
 Verwandt: [[optimus-abgleich-rechenweg]], [[hilgert-abgleich-befund]].

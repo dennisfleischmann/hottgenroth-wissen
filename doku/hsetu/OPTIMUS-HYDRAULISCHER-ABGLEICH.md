@@ -5,7 +5,8 @@
 `eigen/Hsetu.Optimus.BL~90a21848.cs`, Hsetu.Hed 6.7.2.302) und **gegen die zwei Berichte vom
 01.11.2026 zum Projekt „Jonathan Hilgert_Heizlastberechnung" nachgerechnet** — die
 Nachrechnung (`skripte/optimus/optimus-nachrechnen.py`) trifft kv-Werte und Voreinstellungen von
-15 der 19 Fußbodenheizkreise exakt, die Durchflüsse auf 3–5 %. Zeilenangaben beziehen sich auf
+15 der 19 Fußbodenheizkreise exakt, die Durchflüsse auf 3–5 % und die Förderhöhen beider
+Berichte auf 5–12 % (35 °C: 1 818/611 gegen 1 730/571 mbar; 45 °C: 1 202/149 gegen 1 070/152). Zeilenangaben beziehen sich auf
 den Optimus-Build; im Energieberater-Build (`Hsetu.FW.Calculations.cs`, 6.7.6.301) liegen
 dieselben Klassen ein paar hundert Zeilen versetzt.
 
@@ -103,10 +104,11 @@ Klasse `TCalcOptimusSingleCircuitCalcObject` (Z. 33115–33592) und
 | Rohrlänge | `L = A_Heiz / VA` (`ResidentialZoneHcL`) | `CalcDpPipe` |
 | Rohrreibung | `w = V̇/(3600·π·d_i²/4)`, `Re = w·d_i/4,8e-7`, λ Colebrook mit Rauheit **0,0015 mm**, Start Nikuradse, 4 Iterationen; `Δp_Rohr = L · λ·ρ·w²/(2 d_i) / 100` [mbar] | `CalcDpPipe` |
 | Ventil offen | `Δp_V = 1000 · (V̇/kvs)²`; kvs des Kreisventils, **ohne Ventil kvs = 0,7**; Dynacon/Dynacon Eclipse fest 150–250 mbar | `CalcValveDp`, Z. 26930 |
-| Verteilerniveau | `P = max_Kreise(Δp_Verteiler + Δp_Rohr + Δp_V,offen)`; dieser Kreis ist der **„hydraulisch ungünstigste"** | `CalcMaxPressureLoss`, Z. 26560 |
+| Verteilerzuleitung (echtes Rohr) | `Δp_Verteiler` = Colebrook über `L = PmDevice.DistanceToPump` (einfache Länge) mit `d_i = PmConnection.InnerDiameter` des **Vorlaufanschlusses** des Verteilers (`PmDistributor.SupplyConnectorUUID`), **Standard 20 mm**, wenn leer; Durchfluss = Summe der Kreise | `TCalcOptimusDistributorCalcObject.CalcDpPipe` |
+| Verteilerniveau | `P = max_Kreise(Δp_Verteiler + Δp_Rohr + Δp_V,offen)`; dieser Kreis ist der **„hydraulisch ungünstigste"**; für die Ventilwahl zählt `P − Δp_Verteiler` (`CalcDpValveForCircuit`: `Δp_V,soll = DpOfV − Δp_Rohr − Δp_Verteiler`) | `CalcMaxPressureLoss`, Z. 26560; Z. 28060 ff. |
 | Ventilvoreinstellung | `Δp_V,soll = P − Δp_Rohr`, `kv = V̇/√(Δp_V,soll/1000)`, Voreinstellung aus der Kennlinie des Katalogventils (`PressureLossCurveTypeA`, bevorzugt xp = 1 K, dann 2 K) | `TCalcOptimusValveSettingCalcStep`, Z. 50599 ff.; `GetValvePresetValueNotBasis`, Z. 36125 |
-| Zuleitung (Heuristik!) | `R = max(0,2; (V̇_ges[l/h] / (4,3 · A_beheizt[m²]))²)` mbar/m, `Δp_Zul = R · L_Zuleitung`; `A_beheizt` = Summe der **Raumflächen** der versorgten Räume (`CalcHeatedArea`, Z. 29118), `L_Zuleitung` = `PmDevice.DistanceToPump` des Verteilers | `CalcDpPump`, Z. 26500 ff. |
-| Förderhöhe (Verteilung) | `DPthkv = Δp_sonstigeGeräte + Δp_Zähler + max(Δp_Zul, P)`; mindestens `OptimusSettingGroup.MinDeltaP` | ebd. |
+| Netz-Heuristik | `R = max(0,2; (V̇_ges[l/h] / (4,3 · A_beheizt[m²]))²)` mbar/m, `Δp_Netz = R · L_Zuleitung`; `A_beheizt` = Summe der **Raumflächen** der versorgten Räume (`CalcHeatedArea`, Z. 29118), `L_Zuleitung` = `PmDistribution.TechData.PipelineLength` (= Verteilerzuleitung) | `CalcDpPump`, Z. 26500 ff. |
+| Förderhöhe (Verteilung) | `DPthkv = Δp_sonstigeGeräte + Δp_Zähler + max(Δp_Netz, P)`; mindestens `OptimusSettingGroup.MinDeltaP`. Aufgerufen nur, wenn `Domain.ApplicationDomain.TIM` geladen ist (`CalcDistributionDpPump`) | ebd. |
 
 **„Thermisch ungünstigster" Kreis** = der mit dem höchsten `t_V,erf`
 (`TCalcOptimusDistributionThermalWorstCalcObject`); er bestimmt bei freier Optimierung den
@@ -171,16 +173,19 @@ sind das Problem:
    Wohnraum liegen aber die 13-°C-„Dachräume" des OG1, nicht der Himmel. In der sanierten
    Variante bleiben genau diese Fehler stehen (IW weiterhin U 2,0) und dominieren dann die
    Restheizlast — deshalb kommt auch die Variante nicht unter 1 300 W in der Küche.
-4. **Förderhöhe 1 730 mbar.** Das Verteilerniveau (ungünstigster Kreis Kind 2: 256 mbar Rohr +
-   15 mbar Ventil offen) ist physikalisch plausibel. Der Rest kommt aus der
-   **Zuleitungs-Heuristik** `(V̇/(4,3·A))²·L` — bei ΔT = 5 K ist der Volumenstrom etwa viermal
-   so groß wie bei den 20 K, auf die die Heuristik geeicht ist, also 16-facher spezifischer
-   Druckverlust (EG: 30,7 mbar/m × 19 m = 583 mbar) — plus einem weiteren, mit V̇²
-   wachsenden Anlagenanteil (EG ≈ 1 150, OG ≈ 210 mbar; wie ein Gerät mit kvs ≈ 2,1,
-   vermutlich Kessel-/Anlagenpfad bei „Pumpe nicht vorhanden" = Anlagenpumpe). Die exakte
-   Zerlegung ist **offen** — sie braucht einen Lauf mit `calculation.WriteLog = true`.
-   Praktisch: Bei 45 °C sinkt dieselbe Zahl auf 1 070 mbar, bei sanierter Hülle und
-   realistischer Spreizung auf einige hundert.
+4. **Förderhöhe 1 730 mbar — aufgeklärt, kein Rechenfehler.** Das Verteilerniveau
+   (ungünstigster Kreis Kind 2: 256 mbar Rohr + 15 mbar Ventil offen) ist plausibel. Der
+   Rest ist die **Verteilerzuleitung als Rohr**: beide Verteiler tragen am Vorlaufanschluss
+   `InnerDiameter = 0,015` (`PmConnection`, 15 mm; Kern-Standard wären 20 mm), Länge
+   `DistanceToPump` 19 m (EG) / 26 m (OG). 2 275 l/h durch 15 mm = **3,7 m/s** →
+   ≈ 1 500 mbar; dazu das Niveau → Nachrechnung 1 818 mbar (Bericht 1 730; Abweichung =
+   quadrierter Durchfluss-Überhang von 3–5 %). OG: 611 gegen 571. Bei 45 °C: 1 202/149 gegen
+   1 070/152. Die Netz-Heuristik (583 mbar) liegt darunter und zählt nicht. Was-wäre-wenn bei
+   35 °C: Zuleitung 20 mm → EG 666 mbar, 25 mm → 583 mbar (dann bestimmt die Heuristik).
+   **Zwei Eingaben treiben die Zahl:** der Durchfluss (4-fach, weil ΔT auf 5 K geklemmt) und
+   der Zuleitungsdurchmesser (15 mm für einen Verteiler mit 11 Kreisen / 98 m² ist unüblich;
+   26×3 PE-X hat 20 mm, 28×1,5 Cu 25 mm). Ob die 15 mm eingegeben oder aus einer Vorlage
+   übernommen wurden, steht nicht in der Datenbank — am Objekt prüfen.
 5. **Kennwert-Zeile „Kennw. HK-Dim. 25 % 1,2 / 50 % 1,6" und „nicht-einheitliche
    HK-Dimensionierung"** stammt aus dem Dimensionierungs-Durchlauf (`Dimensioning = true`,
    `DimDPthkv`, Z. 40668 ff.); Bedeutung der beiden Zahlen nicht nachgelesen.
@@ -278,7 +283,9 @@ offen.
   4. `PmDevice.MaximalFlowTemperature` des Kessels kappt den erforderlichen Vorlauf.
   5. `HeatingArea`, `ResidentialZoneDistance`, `InnerDiameter` je Kreis gegen den Verlegeplan.
   6. Ergebnisplausibilität: ΔT = 5,0 K bei allen Kreisen heißt „Vorlauf zu niedrig
-     erzwungen"; Förderhöhe > 400 mbar bei FBH ist die Zuleitungs-Heuristik, keine Physik.
+     erzwungen"; Förderhöhe > 400 mbar bei FBH → zuerst `PmConnection.InnerDiameter` des
+     Verteiler-Vorlaufanschlusses und `PmDevice.DistanceToPump` prüfen (Zuleitung als Rohr),
+     dann die Netz-Heuristik; `optimus-nachrechnen.py --di 20` zeigt den Unterschied.
 - **Rechenlauf ohne Oberfläche:** `CalculateHeatloadAndHydraulicBalancingCommand` braucht
   `TFWProjectEnvironmentState.ActiveProjectEnvironment`; der Weg über die Brücke aus
   `hsetu-projekt-headless-laden.md` ist dafür der Ansatz, **nicht erprobt**. Mit
@@ -289,7 +296,6 @@ offen.
 
 ## 8. Offen
 
-- Zerlegung der Förderhöhe 1 730 mbar (Anlagenanteil ∝ V̇²; Herkunft).
 - Bedeutung der Berichtszeile „Kennw. HK-Dim. 25 % 1,2".
 - Ablageort der Heizlast-Projektelemente (`petHeatingLoad`).
 - Lesezugriff auf `HsetuAppTimData` (Ventil-/Pumpenkennlinien) — Login der Software ermitteln

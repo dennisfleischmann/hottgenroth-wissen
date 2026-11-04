@@ -17,8 +17,10 @@ Windows-Login nicht oeffnen darf) und deshalb nur eine Naeherung.
 Erprobt am 04.11.2026 an "Jonathan Hilgert_Heizlastberechnung (1)": kv und
 Voreinstellung bei 15 von 19 Kreisen exakt wie im Bericht, Durchfluesse 3-5 % hoeher
 (der Kern verteilt die Raumlast ueber PlantSpace.RatedHeatingLoad, hier BmRoom).
-Die Foerderhoehe des Kerns liegt UEBER max(Zuleitung, Niveau): ein mit V^2 wachsender
-Anlagenanteil (Hilgert EG ~1150, OG ~210 mbar) ist noch nicht zugeordnet.
+Foerderhoehe: 35 °C EG 1818/OG 611 mbar gegen Bericht 1730/571; 45 °C EG 1202/OG 149
+gegen 1070/152 - die Abweichung ist der quadrierte Durchfluss-Ueberhang. Treiber ist die
+Verteilerzuleitung als Rohr (PmConnection.InnerDiameter des Vorlaufanschlusses, hier
+15 mm, Standard 20 mm) ueber PmDevice.DistanceToPump.
 """
 import argparse, math, sys
 import pyodbc
@@ -52,13 +54,15 @@ def lade(cur, projekt):
                r.ShortDesc AS raum_nr, r.LongDesc AS raum, r.HeatingLoad, r.HeatingRatedHeatingLoad, r.InsideTemperature, r.Area,
                dr.UUID AS dist_uuid, d.LongDesc AS verteilung, d.FlowTemperature, d.ReturnTemperature, d.RatedFlowTemperature,
                d.VolumetricFlow AS dist_v, d.DeltaP AS dist_dp,
-               dev.DistanceToPump
+               dev.DistanceToPump, vl.InnerDiameter AS di_zuleitung
         FROM PmCircuit c
         LEFT JOIN PmBuildingReference br ON br.ReferenceFromUUID=c.UUID AND br.ObjReferenceType=13
         LEFT JOIN BmRoom r ON r.UUID=br.ReferenceToUUID
         LEFT JOIN PmDistributionReference dr ON dr.ReferenceToUUID=c.UUID
         LEFT JOIN PmDistribution d ON d.UUID=dr.UUID
         LEFT JOIN PmDevice dev ON dev.UUID=c.DistributorUUID
+        LEFT JOIN PmDistributor vt ON vt.UUID=c.DistributorUUID
+        LEFT JOIN PmConnection vl ON vl.UUID=vt.SupplyConnectorUUID
         WHERE c.ProjectUUID=?
         ORDER BY d.SortNum, c.SortNum""", puuid)
     kreise = [dict(zip([d[0] for d in cur.description], (val(v) for v in row))) for row in cur.fetchall()]
@@ -109,6 +113,7 @@ def main():
     ap.add_argument('projekt')
     ap.add_argument('--tv', type=float, help='Vorlauftemperatur fuer alle Verteilungen erzwingen')
     ap.add_argument('--kvs', type=float, default=2.4, help='kvs des Verteilerabgangs (Standard 2,4)')
+    ap.add_argument('--di', type=float, help='Innendurchmesser der Verteilerzuleitung in mm erzwingen (Was-waere-wenn)')
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
@@ -135,10 +140,17 @@ def main():
         niveau = max(e['gesamt'] for _, e in erg)                 # hydraulisch unguenstigster Kreis
         v_ges = sum(e['v'] for _, e in erg)
         a_raeume = sum({k['raum_nr']: k['Area'] for k in kk}.values())
+        # Verteilerzuleitung als echtes Rohr (TCalcOptimusDistributorCalcObject.CalcDpPipe):
+        # Laenge = DistanceToPump (einfach), Durchmesser = Vorlaufanschluss des Verteilers, sonst 20 mm
+        zuleitung = kk[0]['DistanceToPump'] or 0.0
+        di_zul = (args.di / 1000.0) if args.di else (kk[0]['di_zuleitung'] or 0.020)
+        w_zul = v_ges / 3600.0 / (math.pi * di_zul ** 2 / 4.0)
+        re_zul = w_zul * di_zul / NU
+        dp_zul = zuleitung * lambda_colebrook(re_zul, di_zul * 1000.0) * RHO * w_zul ** 2 / (2.0 * di_zul) / 100.0 if zuleitung else 0.0
         print(f"{'Kreis':28} {'Raum':13} {'A':>5} {'VA':>5} {'L':>5} {'Q50/40':>6} {'Q_req':>6} {'W/m²':>5} {'tV,erf':>6} {'ΔT':>4} "
               f"{'l/min':>5} {'w':>5} {'Δp_Rohr':>7} {'Δp_V':>5} {'kv':>6} {'Vorein':>6} Hinweis")
         for k, e in erg:
-            dp_v = niveau - e['dp_rohr']
+            dp_v = niveau - e['dp_rohr']                          # Zuleitungs-dp liegt vor allen Kreisen, kuerzt sich heraus
             kv = e['v'] / math.sqrt(dp_v / 1000.0) if dp_v > 0 else float('inf')
             if kv >= args.kvs * 0.999:
                 vorein, hinweis = 'offen', 'voll offen, hydraulisch ungünstigster Kreis' if e['gesamt'] >= niveau * 0.999 else 'voll offen'
@@ -152,13 +164,14 @@ def main():
             print(f"{k['LongDesc'][:28]:28} {k['raum'][:13]:13} {k['HeatingArea']:5.1f} {k['ResidentialZoneDistance']*100:4.1f}c {e['laenge']:5.0f} "
                   f"{k['HeatOutput']:6.0f} {e['q_req']:6.0f} {e['q_flaeche']:5.0f} {e['tv_erf']:6.0f} {e['dt']:4.1f} "
                   f"{e['v']*1000/60:5.2f} {e['w']:5.2f} {e['dp_rohr']:7.0f} {dp_v:5.0f} {kv:6.3f} {vorein:>6} {hinweis}")
-        zuleitung = kk[0]['DistanceToPump'] or 0.0
-        n7 = 4.3 * a_raeume                                       # 43 W/m² · A / (1000 · ΔT 20 K) · 20 ... Referenzstrom [l/h]
+        n7 = 4.3 * a_raeume                                       # Referenzstrom der Netz-Heuristik [l/h]
         r_zul = max(0.2, (v_ges * 1000.0 / n7) ** 2) if n7 else 0.2
         netz = r_zul * zuleitung
+        foerderhoehe = max(netz, dp_zul + niveau)                 # CalcMaxPressureLoss: max(Netz-Heuristik, Verteiler-dp + Kreis + Ventil offen)
         print(f"-> Summe V̇ = {v_ges:.3f} m³/h ({v_ges*1000:.0f} l/h); Verteilerniveau (ungünstigster Kreis) = {niveau:.0f} mbar; "
-              f"beheizte Raumfläche {a_raeume:.1f} m²; Zuleitungs-Heuristik {r_zul:.1f} mbar/m × {zuleitung:.0f} m = {netz:.0f} mbar; "
-              f"Förderhöhe ≈ max({netz:.0f}, {niveau:.0f}) + sonstige Geräte = {max(netz, niveau):.0f} mbar (Bericht/DB: {kk[0]['dist_dp'] or 0:.0f})\n")
+              f"Zuleitung {zuleitung:.0f} m × d_i {di_zul*1000:.0f} mm: w = {w_zul:.2f} m/s, Δp = {dp_zul:.0f} mbar; "
+              f"Netz-Heuristik ({a_raeume:.0f} m²) = {netz:.0f} mbar\n"
+              f"   Förderhöhe = max({netz:.0f}, {dp_zul:.0f} + {niveau:.0f}) = {foerderhoehe:.0f} mbar   (Bericht/DB: {kk[0]['dist_dp'] or 0:.0f} mbar)\n")
 
 
 if __name__ == '__main__':

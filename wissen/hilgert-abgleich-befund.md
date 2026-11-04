@@ -23,8 +23,14 @@ des Bestands → Bericht aus dem falschen Projekt oder falsch beschriftet. Beide
 13-°C-Dachräume des OG1. Küche 222 W/m², Gebäude 98 W/m²; eine FBH kann bei 35/30 ≈ 50 W/m².
 Deshalb: ΔT = 5 K überall, „kein passender Ventiltyp", „>100 W/m²", „zu klein dimensioniert".
 
+**Förderhöhe 1 730 mbar (EG) / 571 (OG):** aufgeklärt, kein Rechenfehler — Verteilerzuleitung
+als 15-mm-Rohr (`PmConnection.InnerDiameter 0,015` am Vorlaufanschluss beider Verteiler;
+Kern-Standard 20 mm) über 19/26 m bei vierfachem Durchfluss (ΔT auf 5 K geklemmt). Mit 20 mm
+666 mbar, mit 25 mm 583. Siehe [[optimus-foerderhoehe-ist-heuristik]].
+
 **Noch offen (Entscheidung Dennis):** Angrenzungen korrigieren (in Original *und* Variante),
 End-Zustand nur aus der Variante drucken, `RatedFlowTemperature` leer lassen, Pumpe
-eintragen. Kreislängen (Küche 60 m bei 6 m²) gegen den Verlegeplan halten.
+eintragen, **Zuleitungsdurchmesser am Objekt prüfen** (15 mm für 11 Kreise ist unüblich).
+Kreislängen (Küche 60 m bei 6 m²) gegen den Verlegeplan halten.
 
 Verwandt: [[optimus-abgleich-rechenweg]], [[optimus-foerderhoehe-ist-heuristik]].
