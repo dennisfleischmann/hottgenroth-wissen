@@ -273,8 +273,12 @@ Kern.
 - **`Hsetu.Profiles.*`** (4 Module) — Nutzungsprofile über `Model.Pdm`.
 - **`Hsetu.HeatPumpConsultant.*`** (6) und **`Hsetu.HeatPumpCheck.*`** (5) —
   Wärmepumpen-Beratung und -Eignungsprüfung.
-- **`Hsetu.Optimus.*`** (5) — Sanierungsoptimierung: `Calculations.BuildingElements`
-  mit `Calc`, `Steps` und `Strategies`, dazu `Typology`. Sucht Maßnahmenkombinationen.
+- **`Hsetu.Optimus.*`** (5) — **hydraulischer Abgleich nach Verfahren B** (Raumheizlast →
+  Heizflächenleistung → Volumenstrom → Ventilvoreinstellung → Förderhöhe). Der Rechenkern
+  liegt in `Hsetu.FW.Calculations` (`TCalcOptimus*`), `Optimus.BL` hält Oberflächenlogik und
+  den Einstiegsbefehl `CalculateHeatloadAndHydraulicBalancingCommand`; die
+  `Calculations.BuildingElements`-Schritte spiegeln nur Bauteilwerte aus dem Gebäudemodul.
+  Rechenweg und Datenmodell: [OPTIMUS-HYDRAULISCHER-ABGLEICH.md](OPTIMUS-HYDRAULISCHER-ABGLEICH.md).
 - **`Hsetu.Hed`** (426 Typen) — Heizungsauslegung als Oberflächenmodul:
   Heizkörperauswahl und -bemessung (`RadiatorDimensionSelectViewModel`,
   `RadiatorDetailViewModel`), Flächenheizkreise (`CircuitAreaListViewModel`),

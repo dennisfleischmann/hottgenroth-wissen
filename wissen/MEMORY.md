@@ -114,3 +114,6 @@ Eine Zeile je Eintrag, Details stehen nur in der verlinkten Datei. Neue Einträg
 - [Dennis gibt alle Rechte](dennis-gibt-alle-rechte.md) — 18.10.2026: Echtläufe nach grünem Probelauf direkt fahren, nicht vorlegen; Prod-Aktionen bleiben ausgenommen
 - [Treppen setzen](hottgenroth-treppen.md) — ElementType 10, 5 Zeilen + assistant_data; New-Treppe.ps1 (Kopiermuster); Deckenöffnung beim ersten Echtlauf prüfen
 - [ECO-CAD: Dichte steuert Bezugsmenge](eco-cad-dichte-steuert-bezugsmenge.md) — Schichtdichte = EPD-Rohdichte, sonst Faktor 30; Endenergie brutto + PV-Anrechnung getrennt
+- [Optimus: Rechenweg des hydraulischen Abgleichs](optimus-abgleich-rechenweg.md) — Kern in `Hsetu.FW.Calculations`; Last nach Normleistung 50/40 verteilt, Spreizung 5…15 K, +15 % Volumenstrom; Ergebnisse nur im Bericht
+- [Optimus: Förderhöhe ist eine Heuristik](optimus-foerderhoehe-ist-heuristik.md) — Zuleitung `(V̇/(4,3·A))²·L`, explodiert bei erzwungener 5-K-Spreizung; >400 mbar bei FBH = Eingabesymptom
+- [Hilgert: Abgleich-Befund](hilgert-abgleich-befund.md) — „35 °C End Zustand" aus dem unsanierten Projekt gedruckt; IW/IT/Decke als Außenbauteile (≈3,3 kW zu viel)
