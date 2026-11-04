@@ -121,6 +121,16 @@ def main():
     pname, kreise, tv_max = lade(cur, args.projekt)
     print(f"Projekt: {pname}   Vorlauf-Obergrenze des Kerns: {tv_max:.0f} °C (52 °C oder Kessel-Maximum)\n")
 
+    # Kreise ohne Normleistung, Raum oder Verteilung kann der Kern nicht rechnen - hier auch nicht
+    fehlend = [k for k in kreise if not k['HeatOutput'] or not k['raum_nr'] or not k['dist_uuid']]
+    for k in fehlend:
+        print(f"übersprungen: {k['LongDesc']} (Normleistung {k['HeatOutput']}, Raum {k['raum_nr']}, Verteilung {k['verteilung']})")
+    kreise = [k for k in kreise if k not in fehlend]
+    for k in kreise:
+        k['Area'] = k['Area'] or 0.0
+        k['ResidentialZoneDistance'] = k['ResidentialZoneDistance'] or 0.1
+        k['InnerDiameter'] = k['InnerDiameter'] or 0.014
+
     # Raumheizlast nach Normleistung 50/40 auf die Kreise des Raums verteilen (RequiredOutputCalcObject)
     for k in kreise:
         geschw = [x for x in kreise if x['raum_nr'] == k['raum_nr'] and x['dist_uuid'] == k['dist_uuid']]
